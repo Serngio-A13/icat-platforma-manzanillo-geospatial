@@ -23,7 +23,7 @@ function adminIsAuthenticated(): bool
 function requireAdmin(): void
 {
     if (!adminIsAuthenticated()) {
-        header('Location: /admin/login.php');
+        header('Location: login.php');
         exit;
     }
 }
