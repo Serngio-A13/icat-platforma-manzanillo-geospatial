@@ -38,7 +38,7 @@ if (count(array_unique($usernames)) !== 3) {
 try {
     $pdo = getDatabaseConnection();
     $pdo->beginTransaction();
-    $count = (int)$pdo->query('SELECT COUNT(*) FROM usuarios FOR UPDATE')->fetchColumn();
+    $count = (int)$pdo->query('SELECT COUNT(*) FROM usuarios')->fetchColumn();
     if ($count !== 0) {
         $pdo->rollBack();
         fwrite(STDERR, "La tabla usuarios ya contiene cuentas. Por seguridad, este script solo funciona con una tabla vacía.\n");
