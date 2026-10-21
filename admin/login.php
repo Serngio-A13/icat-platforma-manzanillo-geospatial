@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if ($error !== ''): ?>
       <div class="alert" role="alert"><?= escapeHtml($error) ?></div>
     <?php endif; ?>
-    <form method="post" action="/admin/login.php">
+    <form method="post" action="login.php">
       <input type="hidden" name="csrf_token" value="<?= escapeHtml(adminCsrfToken()) ?>">
       <label for="username">Usuario</label>
       <input id="username" name="username" type="text" autocomplete="username" maxlength="50" required>
