@@ -1,0 +1,38 @@
+<?php
+declare(strict_types=1);
+$pageTitle = 'Vulnerabilidad costera | Manzanillo, Colima';
+?>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Plataforma de consulta y divulgación de información geoespacial sobre vulnerabilidad costera en Manzanillo, Colima.">
+<title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script defer src="assets/js/app.js"></script>
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="#inicio"><span class="brand-mark">IC</span><span><strong>OBSERVATORIO COSTERO</strong><small>Manzanillo · Colima, México</small></span></a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menú ☰</button>
+<nav id="main-nav"><a href="#proyecto">Proyecto</a><a href="#visor">Visor GIS</a><a href="#multimedia">Multimedia</a><a href="#recorrido">Recorrido 3D</a><a href="#cronologia">Cronología</a></nav>
+</header>
+<main>
+<section class="hero" id="inicio"><div class="hero-grid"></div><div class="hero-content">
+<p class="eyebrow"><span class="dot"></span> PLATAFORMA DE INVESTIGACIÓN · PAPIIT 2026</p>
+<h1>Comprender la costa.<br><span>Visualizar el cambio.</span></h1>
+<p class="lead">Explora información geoespacial, recursos multimedia y materiales científicos sobre la vulnerabilidad costera en Manzanillo, Colima.</p>
+<div class="actions"><a class="button primary" href="#visor">Explorar visor ↗</a><a class="button ghost" href="#proyecto">Conocer el proyecto</a></div>
+<div class="hero-meta">19°03′ N <i></i> 104°19′ O <i></i> OCÉANO PACÍFICO</div>
+</div><div class="hero-aside">GEOSPATIAL RESEARCH PLATFORM / 2026</div><div class="hero-bottom">INFORMACIÓN · TERRITORIO · MEMORIA <a href="#proyecto">↓</a></div></section>
+<section class="section" id="proyecto"><div class="kicker">01 / EL PROYECTO</div><div class="intro-layout"><div><p class="eyebrow">CIENCIA ABIERTA · CONTEXTO COSTERO</p><h2>Un territorio.<br><span>Múltiples capas de información.</span></h2></div><div class="intro-copy"><p>Esta plataforma reúne recursos geoespaciales y multimedia generados por el equipo de investigación para facilitar su consulta, visualización y divulgación.</p><p>El sitio está diseñado para investigadores, estudiantes y público interesado en conocer el territorio costero de Manzanillo.</p><a class="text-link" href="#multimedia">Explorar los recursos ↗</a></div></div><div class="stats"><div><b>01</b><span>Territorio de estudio</span></div><div><b>GIS</b><span>Visualización espacial</span></div><div><b>3D</b><span>Recorridos inmersivos</span></div><div><b>DATA</b><span>Recursos de investigación</span></div></div></section>
+<section class="section map-section" id="visor"><div class="section-heading"><div class="kicker">02 / EXPLORACIÓN ESPACIAL</div><h2>Visor <span>geoespacial</span></h2></div><p class="section-lead">Consulta el territorio sobre un mapa interactivo. La geometría inicial es ilustrativa y debe sustituirse por datos validados del equipo de investigación.</p><div class="map-shell"><div class="map-toolbar"><span><i class="dot"></i> VISOR DE DEMOSTRACIÓN</span><span>MANZANILLO, COLIMA</span></div><div id="coastal-map" aria-label="Mapa interactivo de demostración de Manzanillo"></div><div class="map-legend">Polígono ilustrativo de prueba <span>Base cartográfica © OpenStreetMap</span></div></div><p class="note">El polígono es únicamente un ejemplo técnico; no representa una delimitación científica ni un resultado del proyecto PAPIIT.</p></section>
+<section class="section" id="multimedia"><div class="kicker">03 / ARCHIVO VISUAL</div><h2>Documentación <span>del territorio</span></h2><p class="section-lead">Espacio para organizar fotografías, imágenes aéreas, videos y otros materiales autorizados de la investigación.</p><div class="media-grid"><article><div class="media-art art-one"><span>01 / IMAGEN AÉREA</span><b>＋</b></div><small>IMÁGENES · DRON</small><h3>Vista desde el aire</h3><p>Material aéreo proporcionado por el equipo de investigación.</p></article><article><div class="media-art art-two"><span>02 / REGISTRO VISUAL</span><b>≈</b></div><small>FOTOGRAFÍA</small><h3>Registro costero</h3><p>Fotografías para documentar sitios y condiciones observadas.</p></article><article><div class="media-art art-three"><span>03 / MATERIAL AUDIOVISUAL</span><b>▶</b></div><small>VIDEO · MULTIMEDIA</small><h3>Historias del litoral</h3><p>Recursos audiovisuales de divulgación y documentación.</p></article></div><p class="note">Tarjetas de muestra: se sustituirán por archivos reales autorizados y sus metadatos.</p></section>
+<section class="section" id="recorrido"><div class="tour-panel"><div><div class="kicker">04 / EXPLORACIÓN INMERSIVA</div><p class="eyebrow">RECORRIDO VIRTUAL</p><h2>Explora el espacio<br><span>desde otra perspectiva.</span></h2><p>Integra aquí el recorrido 3DVista cuando el equipo proporcione la carpeta publicada del tour o su URL autorizada.</p><a class="button primary" href="#contacto">Preparar recorrido ↗</a></div><div class="tour-visual"><div class="tour-ring"></div><div class="tour-center"><b>360°</b><small>VIRTUAL TOUR</small></div><span>3D / IMMERSIVE VIEW</span></div></div></section>
+<section class="section" id="cronologia"><div class="kicker">05 / PERSPECTIVA TEMPORAL</div><h2>El territorio <span>en el tiempo</span></h2><p class="section-lead">Sección preparada para organizar campañas, fechas de captura y materiales disponibles. El análisis multitemporal se definirá con el equipo asesor.</p><div class="timeline"><article><small>FASE 01</small><div><h3>Recopilación de información</h3><p>Inventario de materiales existentes y metadatos disponibles.</p></div><b>01</b></article><article><small>FASE 02</small><div><h3>Organización y visualización</h3><p>Integración de recursos compatibles en la plataforma web.</p></div><b>02</b></article><article><small>FASE 03</small><div><h3>Consulta comparativa</h3><p>Alcance por definir según disponibilidad y comparabilidad de los datos.</p></div><b>03</b></article></div></section>
+<section class="section info-section"><div class="kicker">06 / PLATAFORMA DE CONSULTA</div><div class="info-grid"><article><small>01 — ACCESO</small><h3>Información accesible</h3><p>Consulta pública de los materiales autorizados, con una interfaz clara y adaptable.</p></article><article><small>02 — CONTEXTO</small><h3>Recursos documentados</h3><p>Contenido organizado para conservar contexto, descripción y procedencia.</p></article><article><small>03 — TECNOLOGÍA</small><h3>Visualización interactiva</h3><p>Integración progresiva de cartografía, multimedia y recorridos virtuales.</p></article></div></section>
+</main>
+<footer id="contacto"><div class="footer-top"><a class="brand" href="#inicio"><span class="brand-mark">IC</span><span><strong>OBSERVATORIO COSTERO</strong><small>Manzanillo · Colima, México</small></span></a><p>Plataforma web para consulta y divulgación de información geoespacial costera.</p><a href="#inicio">VOLVER ARRIBA ↑</a></div><div class="footer-bottom"><span>PROYECTO DE RESIDENCIA · ICAT / UNAM</span><span>Versión de demostración · 2026</span></div></footer>
+</body></html>
