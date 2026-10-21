@@ -4,7 +4,7 @@ require_once __DIR__ . '/../php/admin/auth.php';
 require_once __DIR__ . '/../php/config/database.php';
 
 if (adminIsAuthenticated()) {
-    header('Location: /admin/index.php');
+    header('Location: index.php');
     exit;
 }
 
