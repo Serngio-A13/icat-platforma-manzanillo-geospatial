@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="admin-body">
   <main class="login-card">
-    <a class="brand-link" href="/">Atlas Digital Litoral <span>Manzanillo · ICAT</span></a>
+    <a class="brand-link" href="../">Atlas Digital Litoral <span>Manzanillo · ICAT</span></a>
     <p class="eyebrow">ÁREA PRIVADA</p>
     <h1>Iniciar sesión</h1>
     <p class="muted">Acceso exclusivo para las cuentas autorizadas del equipo investigador.</p>
