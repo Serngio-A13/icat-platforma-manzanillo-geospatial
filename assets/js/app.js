@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-model-category]').forEach(button => button.addEventListener('click', () => {
     document.querySelectorAll('[data-model-category]').forEach(b => b.classList.toggle('is-active', b === button));
     document.querySelectorAll('[data-model]').forEach(card => {
-      card.hidden = button.dataset.modelCategory !== 'todos' && card.dataset.model !== button.dataset.modelCategory;
+      card.hidden = button.dataset.modelCategory !== 'todos' && !card.dataset.model.split(',').includes(button.dataset.modelCategory);
     });
   }));
 
@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateComparison = () => {
       const value = Number(slider.value);
       divider.style.left = value + '%';
+      const afterPane = document.querySelector('.compare-after');
+      if (afterPane) afterPane.style.clipPath = 'inset(0 0 0 ' + value + '%)';
       output.value = value + '%';
       output.textContent = value + '%';
     };
