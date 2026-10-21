@@ -28,7 +28,7 @@ try {
 </head>
 <body class="admin-body">
   <header class="admin-topbar">
-    <a class="brand-link" href="/">Atlas Digital Litoral <span>Administración</span></a>
+    <a class="brand-link" href="../">Atlas Digital Litoral <span>Administración</span></a>
     <form method="post" action="/admin/logout.php">
       <input type="hidden" name="csrf_token" value="<?= escapeHtml(adminCsrfToken()) ?>">
       <button class="button-secondary" type="submit">Cerrar sesión</button>
