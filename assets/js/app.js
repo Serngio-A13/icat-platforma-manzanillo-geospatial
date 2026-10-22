@@ -110,9 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }));
 
-  // Abre los mapas PDF en una ventana dentro del sitio, sin navegar fuera del Atlas.
+  // Abre cada mapa en el visor PDF.js integrado; evita Google Docs Viewer.
   const mapModal = document.getElementById('research-map-modal');
-  const mapFrame = document.getElementById('research-map-frame');
   const mapTitle = document.getElementById('research-map-title');
   const mapDownload = document.getElementById('research-map-download');
   let lastMapTrigger = null;
@@ -121,21 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
     mapModal.classList.remove('is-open');
     mapModal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
-    mapFrame.src = 'about:blank';
+    document.dispatchEvent(new CustomEvent('atlas:close-pdf'));
     if (lastMapTrigger) lastMapTrigger.focus();
   };
   document.querySelectorAll('[data-map-url]').forEach(button => button.addEventListener('click', () => {
     lastMapTrigger = button;
     const url = button.dataset.mapUrl;
-    mapTitle.textContent = button.dataset.mapTitle || 'Mapa temático';
-    // GitHub Raw sirve algunos PDF como descarga; por eso no se incrusta directamente.
-    // Google Docs Viewer muestra el PDF dentro de la ventana y no inicia una descarga local.
-    mapFrame.src = 'https://docs.google.com/gview?embedded=1&url=' + encodeURIComponent(url);
-    // La descarga solo ocurre si el usuario pulsa expresamente el botón de descarga.
+    const title = button.dataset.mapTitle || 'Mapa temático';
+    mapTitle.textContent = title;
     mapDownload.href = url;
-    mapDownload.removeAttribute('target');
-    mapDownload.removeAttribute('download');
+    mapDownload.target = '_blank';
     mapDownload.rel = 'noopener noreferrer';
+    mapDownload.removeAttribute('download');
+    document.dispatchEvent(new CustomEvent('atlas:open-pdf', { detail: { url, title } }));
     mapModal.classList.add('is-open');
     mapModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
