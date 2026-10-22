@@ -4,3 +4,38 @@
 @media(max-width:760px){.site-header{align-items:center;min-height:70px}.menu-toggle{display:block;flex-shrink:0}nav{display:none;position:absolute;top:69px;left:0;right:0;padding:15px 20px;background:#081820;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;max-height:75vh;overflow:auto}nav.is-open{display:flex}nav a{font-size:11px;padding:5px 0}.hero{min-height:620px;padding:75px 24px 95px}.hero-grid{width:280px;height:280px;right:-25%;top:12%}.hero-aside{display:none}.hero-meta{font-size:8px;gap:8px;flex-wrap:wrap}.quick-links{grid-template-columns:repeat(2,1fr);padding:0 14px}.quick-links>a:last-child{grid-column:1/-1}.section{padding:65px 20px}.intro-layout{grid-template-columns:1fr;gap:5px}.intro-copy{padding-top:0}.project-tabs{grid-template-columns:1fr}.tab-list{border-right:0;border-bottom:1px solid var(--line);flex-direction:row;overflow:auto}.tab-button{white-space:nowrap}.gis-layout,.catalog-layout,.repository-layout,.vulnerability-layout{grid-template-columns:1fr}.layer-list{grid-template-columns:repeat(2,minmax(0,1fr))}.tool-list{grid-template-columns:repeat(2,minmax(0,1fr));display:grid}.category-panel{display:grid;grid-template-columns:repeat(2,1fr)}.category-panel h3{grid-column:1/-1}.model-grid,.multimedia-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.timeline-bottom{grid-template-columns:1fr}.year-track{overflow:auto;justify-content:flex-start}.year-track button{flex-shrink:0}.comparison-demo{height:240px}.repository-head{align-items:flex-start;flex-direction:column}.footer-top{flex-wrap:wrap;align-items:flex-start}.footer-top p{order:3;flex-basis:100%}}
 @media(max-width:480px){.brand strong{font-size:8px}.brand small{font-size:8px}.brand-mark{min-width:36px;height:36px}h1{font-size:45px}h2{font-size:34px}.quick-links{grid-template-columns:1fr 1fr}.quick-links>a{padding:13px;min-height:135px}.quick-links strong{font-size:10px}.quick-links small{font-size:9px}.model-grid,.multimedia-grid{grid-template-columns:1fr}.model-art,.multimedia-grid .media-art{height:190px}.layer-list{grid-template-columns:1fr}.vulnerability-map{min-height:350px}.vulnerability-callout{max-width:150px;padding:10px}.vulnerability-scale{padding:10px;min-width:125px}.vulnerability-scale h3{font-size:9px}.comparison-demo{height:200px}.footer-bottom{flex-direction:column;gap:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+
+/* Imagen de portada inmersiva: el archivo optimizado se guarda en assets/images/hero-playa-drone.webp. */
+.hero {
+    position: relative;
+    isolation: isolate;
+    background-color: #06141b;
+    background-image:
+        linear-gradient(90deg, rgb(4 17 24 / 68%) 0%, rgb(4 17 24 / 38%) 42%, rgb(4 17 24 / 5%) 100%),
+        linear-gradient(0deg, rgb(4 17 24 / 42%) 0%, transparent 42%),
+        url('../images/hero-playa-drone.webp');
+    background-position: center, center, center 54%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hero-grid {
+    opacity: .06;
+}
+
+.hero-content,
+.hero-aside,
+.hero-bottom {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 700px) {
+    .hero {
+        background-image:
+            linear-gradient(90deg, rgb(4 17 24 / 66%) 0%, rgb(4 17 24 / 30%) 100%),
+            linear-gradient(0deg, rgb(4 17 24 / 46%) 0%, transparent 58%),
+            url('../images/hero-playa-drone.webp');
+        background-position: center, center, 58% center;
+    }
+}

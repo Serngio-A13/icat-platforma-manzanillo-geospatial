@@ -1,0 +1,92 @@
+/* Estilos propios del mapa de perfiles costeros.
+   Las bibliotecas de terceros se conservan en archivos separados para facilitar su actualización. */
+
+/* El documento ocupa toda el área disponible dentro del iframe del Atlas. */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #0b1c25;
+}
+
+/* Leaflet dibuja las capas dentro de este contenedor de tamaño adaptable. */
+#map {
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    background: #0b1c25;
+}
+
+/* Define una tipografía legible para los controles del mapa. */
+.leaflet-container {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Reserva un ancho real para el contenido: evita que Leaflet lo deje en tamaño de miniatura. */
+.leaflet-popup-content {
+    box-sizing: border-box;
+    width: min(70vw, 720px) !important;
+    max-width: min(70vw, 720px) !important;
+    max-height: 74vh;
+    margin: 14px 18px;
+    overflow: auto;
+}
+
+/* La fotografía o gráfica se presenta directamente dentro de la ventana emergente. */
+.leaflet-popup-content .perfil-popup img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 66vh;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    margin: 10px auto 0;
+    background: #fff;
+}
+
+/* Presentación del nombre del perfil en las ventanas emergentes. */
+.perfil-popup h2 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #14212a;
+}
+
+/* Evita que la ventana emergente rebase el área visible del mapa. */
+.leaflet-popup {
+    max-width: 84vw;
+}
+
+/* Estilo de las etiquetas permanentes de los puntos. */
+.etiqueta-perfil {
+    padding: 2px 4px;
+    border: 0;
+    border-radius: 3px;
+    background: rgb(6 20 27 / 82%);
+    box-shadow: none;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* En teléfonos, la imagen aprovecha el ancho disponible sin salir de la pantalla. */
+@media (max-width: 600px) {
+    .leaflet-popup-content {
+        width: 68vw !important;
+        max-width: 68vw !important;
+        margin: 12px;
+    }
+
+    .leaflet-popup-content .perfil-popup img {
+        max-height: 60vh;
+    }
+
+    .etiqueta-perfil {
+        font-size: 10px;
+    }
+}
