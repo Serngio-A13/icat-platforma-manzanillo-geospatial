@@ -19,6 +19,7 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
 <link rel="stylesheet" href="assets/css/research-library.css">
 <!-- El mapa tiene sus propias dependencias aisladas en un iframe. -->
 <script defer src="assets/js/app.js"></script>
+<script type="module" src="assets/js/pdf-viewer.js"></script>
 </head>
 <body>
 <header class="site-header">
@@ -185,7 +186,7 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
   <section class="map-modal-panel" role="document">
     <header class="map-modal-header"><div><small>REPOSITORIO CARTOGRÁFICO</small><h2 id="research-map-title">Mapa temático</h2></div><button type="button" class="map-modal-close" data-map-close aria-label="Cerrar y regresar al sitio">×</button></header>
     <div class="map-modal-actions"><a id="research-map-download" class="button primary" href="#" download>Descargar mapa ↓</a><button type="button" class="button ghost" data-map-close>Regresar al atlas ↗</button></div>
-    <iframe id="research-map-frame" title="Vista previa del mapa seleccionado" loading="lazy"></iframe>
+    <div class="pdf-viewer" id="research-pdf-viewer" aria-live="polite"><div class="pdf-viewer-toolbar"><button type="button" id="pdf-prev" disabled>← Anterior</button><span id="pdf-page-status">Preparando visor…</span><button type="button" id="pdf-next" disabled>Siguiente →</button><button type="button" id="pdf-zoom-out" aria-label="Reducir zoom">−</button><button type="button" id="pdf-zoom-in" aria-label="Aumentar zoom">+</button></div><div class="pdf-canvas-wrap" id="pdf-canvas-wrap"><p class="pdf-loading" id="pdf-loading">Cargando documento…</p><canvas id="pdf-canvas" hidden></canvas></div></div>
     <p class="map-modal-note">Si el navegador no muestra la vista previa del PDF, utiliza «Descargar mapa» para guardarlo y abrirlo localmente.</p>
   </section>
 </div>
