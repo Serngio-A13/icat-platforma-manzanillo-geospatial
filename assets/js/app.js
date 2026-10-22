@@ -129,8 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = button.dataset.mapUrl;
     mapTitle.textContent = button.dataset.mapTitle || 'Mapa temático';
     mapFrame.src = url;
-    mapDownload.href = url.replace('https://raw.githubusercontent.com/Serngio-A13/Mapa1/main/', 'https://github.com/Serngio-A13/Mapa1/raw/refs/heads/main/');
-    mapDownload.setAttribute('download', '');
+    // La vista previa usa la URL Raw; la descarga queda reservada al botón explícito.
+    // El atributo download no es fiable en enlaces de otro dominio.
+    const encodedPath = url.replace('https://raw.githubusercontent.com/Serngio-A13/Mapa1/main/', '');
+    mapDownload.href = 'https://github.com/Serngio-A13/Mapa1/raw/refs/heads/main/' + encodedPath;
+    mapDownload.removeAttribute('download');
+    mapDownload.target = '_blank';
+    mapDownload.rel = 'noopener noreferrer';
     mapModal.classList.add('is-open');
     mapModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
