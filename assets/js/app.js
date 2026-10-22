@@ -128,13 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
     lastMapTrigger = button;
     const url = button.dataset.mapUrl;
     mapTitle.textContent = button.dataset.mapTitle || 'Mapa temático';
-    mapFrame.src = url;
-    // La vista previa usa la URL Raw; la descarga queda reservada al botón explícito.
-    // El atributo download no es fiable en enlaces de otro dominio.
-    const encodedPath = url.replace('https://raw.githubusercontent.com/Serngio-A13/Mapa1/main/', '');
-    mapDownload.href = 'https://github.com/Serngio-A13/Mapa1/raw/refs/heads/main/' + encodedPath;
+    // GitHub Raw sirve algunos PDF como descarga; por eso no se incrusta directamente.
+    // Google Docs Viewer muestra el PDF dentro de la ventana y no inicia una descarga local.
+    mapFrame.src = 'https://docs.google.com/gview?embedded=1&url=' + encodeURIComponent(url);
+    // La descarga solo ocurre si el usuario pulsa expresamente el botón de descarga.
+    mapDownload.href = url;
+    mapDownload.removeAttribute('target');
     mapDownload.removeAttribute('download');
-    mapDownload.target = '_blank';
     mapDownload.rel = 'noopener noreferrer';
     mapModal.classList.add('is-open');
     mapModal.setAttribute('aria-hidden', 'false');
