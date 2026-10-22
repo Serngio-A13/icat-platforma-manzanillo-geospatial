@@ -30,15 +30,25 @@
     <script src="data/PUNTOSDEPERFIL_1.js"></script>
 
     <script>
-        // Inicializa el mapa sin fijar una vista inicial: se calculará a partir de todos los puntos.
+        // Inicializa el mapa; la vista se calcula posteriormente a partir de todos los puntos.
         var map = L.map('map', {
-            zoomControl: false, // Los controles de zoom se agregan en la posición indicada abajo.
-            maxZoom: 28,         // Límite de acercamiento permitido en el visor.
-            minZoom: 1            // Límite de alejamiento permitido en el visor.
+            zoomControl: false,
+            maxZoom: 19,
+            minZoom: 1
         });
 
         // Agrega el control de acercamiento y alejamiento en la esquina superior izquierda.
         L.control.zoom({ position: 'topleft' }).addTo(map);
+
+        // Capa base de imágenes satelitales. Se incluye atribución visible del proveedor.
+        // Antes de publicar, verifica las condiciones de uso del servicio de teselas.
+        var capaSatelital = L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            {
+                maxZoom: 19,
+                attribution: 'Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+            }
+        ).addTo(map);
 
         // Conserva la atribución de las herramientas con las que se generó el mapa.
         map.attributionControl.setPrefix(
@@ -70,58 +80,63 @@
                 ? String(feature.properties.Perfil)
                 : 'Perfil sin identificar';
 
-            // El archivo de datos usa "imagenesp/P01.jpeg", mientras que la exportación guarda
-            // los archivos como "images/imagenesp_P01.jpeg"; aquí se normaliza esa diferencia.
+            // Convierte la ruta del dato de QGIS en el nombre real del archivo local.
             var tieneImagen = Boolean(feature.properties && feature.properties.Imagen);
             var nombreArchivo = tieneImagen
                 ? 'imagenesp_' + String(feature.properties.Imagen).split('/').pop().replace(/[^a-zA-Z0-9._-]/g, '')
                 : '';
 
-            // Genera el bloque de imagen solo cuando el registro tiene una referencia asociada.
+            // Genera una imagen ampliable dentro de la ventana emergente.
             var bloqueImagen = tieneImagen
-                ? '<img src="images/' + nombreArchivo + '" alt="Fotografía del perfil ' +
-                    escaparHTML(perfil) + '" loading="lazy">'
-                : '<p>No hay una fotografía asociada a este punto.</p>';
+                ? '<a class="perfil-imagen-enlace" href="images/' + nombreArchivo + '" target="_blank" rel="noopener noreferrer" aria-label="Abrir imagen ampliada del perfil ' +
+                    escaparHTML(perfil) + '">' +
+                    '<img src="images/' + nombreArchivo + '" alt="Fotografía o gráfica del perfil ' +
+                    escaparHTML(perfil) + '" loading="lazy"></a>'
+                : '<p>No hay una imagen asociada a este punto.</p>';
 
-            // Forma el contenido de la ventana emergente con el nombre y la fotografía.
+            // Forma el contenido de la ventana emergente con el nombre y la imagen.
             var contenido = '<div class="perfil-popup">' +
                 '<h2>' + escaparHTML(perfil) + '</h2>' +
                 bloqueImagen +
+                '<p class="perfil-ayuda">Haz clic en la imagen para abrirla en tamaño completo.</p>' +
                 '</div>';
 
-            // Asocia el contenido al punto y limita su tamaño para evitar que desborde la pantalla.
-            capa.bindPopup(contenido, { maxWidth: 360, maxHeight: 400 });
+            // Aumenta el espacio disponible para que la imagen no aparezca como miniatura.
+            capa.bindPopup(contenido, {
+                maxWidth: 760,
+                minWidth: 260,
+                maxHeight: Math.round(window.innerHeight * 0.82),
+                autoPan: true
+            });
         }
 
         // Define la apariencia de los puntos que representan los perfiles.
         function estiloPuntoPerfil() {
             return {
-                radius: 6,              // Radio del símbolo en píxeles.
-                color: '#ff0200',       // Color del borde del punto.
-                weight: 2,              // Grosor del borde.
-                fillColor: '#faff39',   // Color de relleno del punto.
-                fillOpacity: 1,         // Opacidad del relleno.
-                interactive: true       // Permite seleccionar el punto con el cursor o el tacto.
+                radius: 6,
+                color: '#ff0200',
+                weight: 2,
+                fillColor: '#faff39',
+                fillOpacity: 1,
+                interactive: true
             };
         }
 
         // Crea la capa a partir de la colección de puntos exportada por QGIS.
         var capaPerfiles = L.geoJSON(json_PUNTOSDEPERFIL_1, {
-            onEachFeature: mostrarInformacionPerfil, // Asocia cada punto con su ventana emergente.
+            onEachFeature: mostrarInformacionPerfil,
             pointToLayer: function (feature, latlng) {
-                // Representa cada coordenada como un marcador circular.
                 return L.circleMarker(latlng, estiloPuntoPerfil());
             }
         });
 
-        // Añade la capa de perfiles al mapa.
+        // Añade la capa de perfiles encima de la capa satelital.
         capaPerfiles.addTo(map);
 
         // Ajusta la vista para mostrar todos los perfiles, no solo una parte del litoral.
         if (capaPerfiles.getBounds().isValid()) {
             map.fitBounds(capaPerfiles.getBounds().pad(0.12));
         } else {
-            // Vista de respaldo por si en el futuro la capa llega vacía.
             map.setView([19.105, -104.37], 12);
         }
 
@@ -133,15 +148,15 @@
                 : '';
 
             capa.bindTooltip(nombrePerfil, {
-                permanent: true,             // Mantiene visible el identificador del perfil.
-                direction: 'top',            // Sitúa la etiqueta encima del punto.
-                offset: [0, -10],            // Separa la etiqueta del símbolo.
-                className: 'etiqueta-perfil' // Permite personalizar su apariencia mediante CSS.
+                permanent: true,
+                direction: 'top',
+                offset: [0, -10],
+                className: 'etiqueta-perfil'
             });
 
-            labels.push(capa);       // Añade la capa al conjunto de etiquetas administradas.
-            totalMarkers += 1;       // Mantiene el conteo utilizado por el exportador qgis2web.
-            capa.added = true;       // Indica al administrador de etiquetas que la capa ya está añadida.
+            labels.push(capa);
+            totalMarkers += 1;
+            capa.added = true;
             addLabel(capa, indiceEtiqueta);
             indiceEtiqueta += 1;
         });
@@ -160,8 +175,13 @@
             resetLabels([capaPerfiles]);
         });
 
-        // Informa al mapa del tamaño del contenedor una vez que el documento ya está dibujado.
+        // Informa a Leaflet del tamaño real del contenedor tras dibujarse la página.
         window.addEventListener('load', function () {
+            map.invalidateSize();
+        });
+
+        // Recalcula el tamaño del mapa si cambia la ventana del navegador.
+        window.addEventListener('resize', function () {
             map.invalidateSize();
         });
     </script>
