@@ -40,8 +40,7 @@
         // Agrega el control de acercamiento y alejamiento en la esquina superior izquierda.
         L.control.zoom({ position: 'topleft' }).addTo(map);
 
-        // Capa base de imágenes satelitales. Se incluye atribución visible del proveedor.
-        // Antes de publicar, verifica las condiciones de uso del servicio de teselas.
+        // Capa base de imágenes satelitales con atribución visible del proveedor.
         var capaSatelital = L.tileLayer(
             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             {
@@ -80,33 +79,31 @@
                 ? String(feature.properties.Perfil)
                 : 'Perfil sin identificar';
 
-            // Convierte la ruta del dato de QGIS en el nombre real del archivo local.
+            // Convierte la ruta exportada desde QGIS al nombre real del archivo local.
             var tieneImagen = Boolean(feature.properties && feature.properties.Imagen);
             var nombreArchivo = tieneImagen
                 ? 'imagenesp_' + String(feature.properties.Imagen).split('/').pop().replace(/[^a-zA-Z0-9._-]/g, '')
                 : '';
 
-            // Genera una imagen ampliable dentro de la ventana emergente.
+            // Inserta la imagen directamente en la ventana, sin enlaces ni pestañas adicionales.
             var bloqueImagen = tieneImagen
-                ? '<a class="perfil-imagen-enlace" href="images/' + nombreArchivo + '" target="_blank" rel="noopener noreferrer" aria-label="Abrir imagen ampliada del perfil ' +
-                    escaparHTML(perfil) + '">' +
-                    '<img src="images/' + nombreArchivo + '" alt="Fotografía o gráfica del perfil ' +
-                    escaparHTML(perfil) + '" loading="lazy"></a>'
+                ? '<img src="images/' + nombreArchivo + '" alt="Fotografía o gráfica del perfil ' +
+                    escaparHTML(perfil) + '" loading="lazy">'
                 : '<p>No hay una imagen asociada a este punto.</p>';
 
             // Forma el contenido de la ventana emergente con el nombre y la imagen.
             var contenido = '<div class="perfil-popup">' +
                 '<h2>' + escaparHTML(perfil) + '</h2>' +
                 bloqueImagen +
-                '<p class="perfil-ayuda">Haz clic en la imagen para abrirla en tamaño completo.</p>' +
                 '</div>';
 
-            // Aumenta el espacio disponible para que la imagen no aparezca como miniatura.
+            // Usa una ventana amplia y limita su altura a la pantalla disponible.
             capa.bindPopup(contenido, {
-                maxWidth: 760,
-                minWidth: 260,
-                maxHeight: Math.round(window.innerHeight * 0.82),
-                autoPan: true
+                maxWidth: window.innerWidth < 600 ? 340 : 820,
+                minWidth: window.innerWidth < 600 ? 240 : 480,
+                maxHeight: Math.round(window.innerHeight * 0.86),
+                autoPan: true,
+                keepInView: true
             });
         }
 
@@ -133,7 +130,7 @@
         // Añade la capa de perfiles encima de la capa satelital.
         capaPerfiles.addTo(map);
 
-        // Ajusta la vista para mostrar todos los perfiles, no solo una parte del litoral.
+        // Ajusta la vista para mostrar todos los perfiles.
         if (capaPerfiles.getBounds().isValid()) {
             map.fitBounds(capaPerfiles.getBounds().pad(0.12));
         } else {
@@ -164,7 +161,7 @@
         // Recalcula las etiquetas al finalizar la carga inicial del mapa.
         resetLabels([capaPerfiles]);
 
-        // Recalcula las etiquetas cuando cambia el nivel de zoom o se modifica la visibilidad de capas.
+        // Recalcula las etiquetas cuando cambia el nivel de zoom o la visibilidad de capas.
         map.on('zoomend', function () {
             resetLabels([capaPerfiles]);
         });
