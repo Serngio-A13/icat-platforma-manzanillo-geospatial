@@ -185,9 +185,9 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
   <div class="map-modal-backdrop" data-map-close></div>
   <section class="map-modal-panel" role="document">
     <header class="map-modal-header"><div><small>REPOSITORIO CARTOGRÁFICO</small><h2 id="research-map-title">Mapa temático</h2></div><button type="button" class="map-modal-close" data-map-close aria-label="Cerrar y regresar al sitio">×</button></header>
-    <div class="map-modal-actions"><a id="research-map-download" class="button primary" href="#" download>Descargar mapa ↓</a><button type="button" class="button ghost" data-map-close>Regresar al atlas ↗</button></div>
+    <div class="map-modal-actions"><a id="research-map-download" class="button primary" href="#" download>Abrir PDF ↗</a><button type="button" class="button ghost" data-map-close>Regresar al atlas ↗</button></div>
     <div class="pdf-viewer" id="research-pdf-viewer" aria-live="polite"><div class="pdf-viewer-toolbar"><button type="button" id="pdf-prev" disabled>← Anterior</button><span id="pdf-page-status">Preparando visor…</span><button type="button" id="pdf-next" disabled>Siguiente →</button><button type="button" id="pdf-zoom-out" aria-label="Reducir zoom">−</button><button type="button" id="pdf-zoom-in" aria-label="Aumentar zoom">+</button></div><div class="pdf-canvas-wrap" id="pdf-canvas-wrap"><p class="pdf-loading" id="pdf-loading">Cargando documento…</p><canvas id="pdf-canvas" hidden></canvas></div></div>
-    <p class="map-modal-note">Si el navegador no muestra la vista previa del PDF, utiliza «Descargar mapa» para guardarlo y abrirlo localmente.</p>
+    <p class="map-modal-note">La vista previa usa PDF.js. Si el servidor de archivos de origen bloquea la lectura del PDF, utiliza «Abrir PDF» para consultarlo en otra pestaña.</p>
   </section>
 </div>
 </body></html>
