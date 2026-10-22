@@ -25,33 +25,27 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Amplía el área útil de las ventanas emergentes y permite desplazamiento vertical. */
+/* Reserva un ancho real para el contenido: evita que Leaflet lo deje en tamaño de miniatura. */
 .leaflet-popup-content {
-    width: auto !important;
-    max-width: min(78vw, 700px);
-    max-height: 72vh;
+    box-sizing: border-box;
+    width: min(70vw, 720px) !important;
+    max-width: min(70vw, 720px) !important;
+    max-height: 74vh;
     margin: 14px 18px;
     overflow: auto;
 }
 
-/* La imagen usa el ancho disponible aunque el archivo original tenga dimensiones pequeñas. */
+/* La fotografía o gráfica se presenta directamente dentro de la ventana emergente. */
 .leaflet-popup-content .perfil-popup img {
     display: block;
     width: 100%;
-    max-width: min(76vw, 660px);
-    max-height: 64vh;
+    max-width: 100%;
+    max-height: 66vh;
     height: auto;
     object-fit: contain;
     object-position: center;
     margin: 10px auto 0;
     background: #fff;
-}
-
-/* El enlace permite abrir la imagen original en una pestaña para verla con más detalle. */
-.perfil-imagen-enlace {
-    display: block;
-    width: 100%;
-    cursor: zoom-in;
 }
 
 /* Presentación del nombre del perfil en las ventanas emergentes. */
@@ -62,14 +56,7 @@ body {
     color: #14212a;
 }
 
-/* Indicación breve para que el usuario sepa cómo ampliar la imagen. */
-.perfil-ayuda {
-    margin: 8px 0 0;
-    color: #52616b;
-    font-size: 11px;
-}
-
-/* Evita que los controles del mapa queden por debajo de las ventanas emergentes. */
+/* Evita que la ventana emergente rebase el área visible del mapa. */
 .leaflet-popup {
     max-width: 84vw;
 }
@@ -87,16 +74,16 @@ body {
     white-space: nowrap;
 }
 
-/* En teléfonos, se reduce el ancho máximo para mantener la ventana dentro de la pantalla. */
-@media (max-width: 480px) {
+/* En teléfonos, la imagen aprovecha el ancho disponible sin salir de la pantalla. */
+@media (max-width: 600px) {
     .leaflet-popup-content {
-        max-width: 76vw;
+        width: 68vw !important;
+        max-width: 68vw !important;
         margin: 12px;
     }
 
     .leaflet-popup-content .perfil-popup img {
-        max-width: 72vw;
-        max-height: 58vh;
+        max-height: 60vh;
     }
 
     .etiqueta-perfil {
