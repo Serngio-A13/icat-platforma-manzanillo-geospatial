@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = button.dataset.mapUrl;
     mapTitle.textContent = button.dataset.mapTitle || 'Mapa temático';
     mapFrame.src = url;
-    mapDownload.href = url;
+    mapDownload.href = url.replace('https://raw.githubusercontent.com/Serngio-A13/Mapa1/main/', 'https://github.com/Serngio-A13/Mapa1/raw/refs/heads/main/');
     mapDownload.setAttribute('download', '');
     mapModal.classList.add('is-open');
     mapModal.setAttribute('aria-hidden', 'false');
