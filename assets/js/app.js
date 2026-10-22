@@ -100,13 +100,44 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-person-category]').forEach(button => button.addEventListener('click', () => {
     document.querySelectorAll('[data-person-category]').forEach(b => b.classList.toggle('is-active', b === button));
   }));
-  // Filtra las tarjetas de recursos multimedia por tipo de contenido.
+  // Filtra las fotografías por categorías que sí existen en el material recibido.
   document.querySelectorAll('[data-media-category]').forEach(button => button.addEventListener('click', () => {
     document.querySelectorAll('[data-media-category]').forEach(b => b.classList.toggle('is-active', b === button));
     document.querySelectorAll('[data-media]').forEach(card => {
-      // Algunas tarjetas pertenecen a más de una categoría, por eso se separan por espacios.
-      const categorias = card.dataset.media.split(/\\s+/);
+      // Cada tarjeta puede pertenecer a varias categorías separadas por espacios.
+      const categorias = card.dataset.media.split(/\s+/);
       card.hidden = button.dataset.mediaCategory !== 'todos' && !categorias.includes(button.dataset.mediaCategory);
     });
   }));
+
+  // Abre los mapas PDF en una ventana dentro del sitio, sin navegar fuera del Atlas.
+  const mapModal = document.getElementById('research-map-modal');
+  const mapFrame = document.getElementById('research-map-frame');
+  const mapTitle = document.getElementById('research-map-title');
+  const mapDownload = document.getElementById('research-map-download');
+  let lastMapTrigger = null;
+  const closeMapModal = () => {
+    if (!mapModal) return;
+    mapModal.classList.remove('is-open');
+    mapModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    mapFrame.src = 'about:blank';
+    if (lastMapTrigger) lastMapTrigger.focus();
+  };
+  document.querySelectorAll('[data-map-url]').forEach(button => button.addEventListener('click', () => {
+    lastMapTrigger = button;
+    const url = button.dataset.mapUrl;
+    mapTitle.textContent = button.dataset.mapTitle || 'Mapa temático';
+    mapFrame.src = url;
+    mapDownload.href = url;
+    mapDownload.setAttribute('download', '');
+    mapModal.classList.add('is-open');
+    mapModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    mapModal.querySelector('[data-map-close]').focus();
+  }));
+  mapModal?.querySelectorAll('[data-map-close]').forEach(button => button.addEventListener('click', closeMapModal));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && mapModal?.classList.contains('is-open')) closeMapModal();
+  });
 });
