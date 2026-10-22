@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mapModal.classList.add('is-open');
     mapModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
-    mapModal.querySelector('[data-map-close]').focus();
+    mapModal.querySelector('.map-modal-close').focus();
   }));
   mapModal?.querySelectorAll('[data-map-close]').forEach(button => button.addEventListener('click', closeMapModal));
   document.addEventListener('keydown', event => {
