@@ -15,6 +15,8 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
 <link rel="stylesheet" href="assets/css/style.css">
 <!-- Ajustes responsivos documentados para el visor geoespacial integrado. -->
 <link rel="stylesheet" href="assets/css/responsive.css">
+<!-- Componentes visuales de la galería y del catálogo cartográfico real. -->
+<link rel="stylesheet" href="assets/css/research-library.css">
 <!-- El mapa tiene sus propias dependencias aisladas en un iframe. -->
 <script defer src="assets/js/app.js"></script>
 </head>
