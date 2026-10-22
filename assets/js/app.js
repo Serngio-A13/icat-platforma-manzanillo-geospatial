@@ -104,7 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-media-category]').forEach(button => button.addEventListener('click', () => {
     document.querySelectorAll('[data-media-category]').forEach(b => b.classList.toggle('is-active', b === button));
     document.querySelectorAll('[data-media]').forEach(card => {
-      card.hidden = button.dataset.mediaCategory !== 'todos' && card.dataset.media !== button.dataset.mediaCategory;
+      // Algunas tarjetas pertenecen a más de una categoría, por eso se separan por espacios.
+      const categorias = card.dataset.media.split(/\\s+/);
+      card.hidden = button.dataset.mediaCategory !== 'todos' && !categorias.includes(button.dataset.mediaCategory);
     });
   }));
 });
