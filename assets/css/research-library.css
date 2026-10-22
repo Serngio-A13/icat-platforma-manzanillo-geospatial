@@ -1,0 +1,124 @@
+/* Componentes de la biblioteca de fotografías y mapas temáticos reales. */
+
+/* Catálogo adaptable de mapas científicos en PDF. */
+.research-map-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 18px;
+}
+
+.research-map-card {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    padding: 18px;
+    border: 1px solid var(--line);
+    background: #0b1d26;
+}
+
+.research-map-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #54dff055;
+    color: var(--accent);
+    font-size: 25px;
+    background: #102630;
+}
+
+.research-map-card small {
+    color: var(--accent);
+    font: 8px var(--mono);
+    letter-spacing: .08em;
+}
+
+.research-map-card h3 {
+    margin: 6px 0;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.research-map-card p {
+    margin: 0 0 12px;
+    color: #8fa2a8;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.research-map-card a {
+    color: var(--accent);
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.research-map-card a:hover,
+.research-photo-grid .text-link:hover {
+    text-decoration: underline;
+}
+
+/* Las fotografías reales mantienen una proporción uniforme y cargan de forma diferida. */
+.research-photo {
+    display: block;
+    height: 205px;
+    overflow: hidden;
+    background: #102630;
+}
+
+.research-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .25s ease;
+}
+
+.research-photo:hover img {
+    transform: scale(1.035);
+}
+
+.research-photo-grid article {
+    overflow: hidden;
+}
+
+.research-photo-grid article > small {
+    color: var(--accent);
+    font: 8px var(--mono);
+    letter-spacing: .07em;
+}
+
+.research-photo-grid article > h3 {
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 7px;
+    margin-bottom: 6px;
+}
+
+.research-photo-grid article > p {
+    color: #8fa2a8;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.research-photo-grid .text-link {
+    display: inline-block;
+    margin: 0 14px;
+    color: var(--accent);
+    font-size: 10px;
+    text-decoration: none;
+}
+
+@media (max-width: 760px) {
+    .research-map-grid {
+        grid-template-columns: 1fr;
+        padding: 12px;
+    }
+
+    .research-photo {
+        height: 220px;
+    }
+}
