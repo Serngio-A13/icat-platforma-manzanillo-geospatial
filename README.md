@@ -31,3 +31,11 @@ El GeoJSON incluido es ficticio y sirve exclusivamente para probar la carga de c
 - Bootstrap 5 se utiliza en la página principal para la cuadrícula adaptable del panel y el mapa; los estilos propios mantienen la identidad visual del Atlas.
 - El mapa conserva la capa satelital de la exportación recibida. Antes de publicar en el servidor de ICAT, debe confirmarse que la fuente de mosaicos y su atribución cumplan las condiciones de uso correspondientes.
 - La integración no convierte los perfiles en un índice de vulnerabilidad ni valida científicamente los datos; esa validación corresponde al equipo de investigación.
+
+
+## Galería y mapas temáticos integrados
+- La sección Multimedia presenta fotografías JPG desde la carpeta `MAPA INTERACTIVO/Fotos` del repositorio fuente `Serngio-A13/Mapa1`, usando carga diferida para reducir las descargas iniciales.
+- La sección Datos y resultados ahora contiene enlaces a los cinco mapas PDF disponibles: batimetría, clima, crecimiento urbano, uso/cambio de suelo y puntos de Manzanillo.
+- Los recursos siguen alojados en el repositorio fuente y se consumen mediante URLs de GitHub Raw; esto evita duplicar por ahora los archivos binarios en este repositorio, aunque la publicación final debería migrarlos a almacenamiento institucional controlado.
+- Los archivos HEIC y una fotografía JPG de aproximadamente 10 MB no se muestran todavía en la galería: deben convertirse/optimizarse para garantizar compatibilidad y rendimiento.
+- Antes de publicar, confirmar permisos de difusión, autoría, metadatos y permanencia de las URLs fuente. Las descripciones de tarjetas son orientativas, no metadatos científicos validados.
