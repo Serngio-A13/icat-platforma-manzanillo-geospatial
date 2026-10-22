@@ -9,9 +9,13 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Atlas digital del litoral de Manzanillo: visor geoespacial, modelos 3D, línea del tiempo, vulnerabilidad costera, resultados científicos y multimedia.">
 <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<!-- Bootstrap 5: sistema de cuadrícula responsiva para distribuir los módulos. -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!-- Estilos propios del Atlas; se cargan después de Bootstrap para conservar la identidad visual. -->
 <link rel="stylesheet" href="assets/css/style.css">
-<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Ajustes responsivos documentados para el visor geoespacial integrado. -->
+<link rel="stylesheet" href="assets/css/responsive.css">
+<!-- El mapa tiene sus propias dependencias aisladas en un iframe. -->
 <script defer src="assets/js/app.js"></script>
 </head>
 <body>
@@ -25,6 +29,7 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
   </nav>
 </header>
 <main>
+<!-- Portada principal: presenta el propósito y la identidad del Atlas. -->
 <section class="hero" id="inicio">
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-content">
@@ -37,6 +42,7 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
   <div class="hero-aside">GEOSPATIAL COASTAL RESEARCH / IF100926</div>
   <div class="hero-bottom"><span>INFORMACIÓN · TERRITORIO · MEMORIA COSTERA</span><a href="#servicios" aria-label="Ver módulos">↓</a></div>
 </section>
+<!-- Accesos rápidos: enlazan con los módulos principales de la plataforma. -->
 <section class="quick-links" id="servicios" aria-label="Módulos principales">
   <a href="#visor"><span class="module-icon">⌖</span><strong>Visor geoespacial</strong><small>Mapas y capas temáticas</small><b>↗</b></a>
   <a href="#modelos"><span class="module-icon">◇</span><strong>Modelos 3D</strong><small>Playas, acantilados y relieve</small><b>↗</b></a>
@@ -44,6 +50,7 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
   <a href="#vulnerabilidad"><span class="module-icon">≋</span><strong>Vulnerabilidad costera</strong><small>Variables y niveles de riesgo</small><b>↗</b></a>
   <a href="#resultados"><span class="module-icon">▤</span><strong>Datos y resultados</strong><small>Consulta de productos científicos</small><b>↗</b></a>
 </section>
+<!-- Módulo 01: descripción, objetivos y metodología del proyecto. -->
 <section class="section" id="proyecto">
   <div class="kicker">01 / EL PROYECTO</div>
   <div class="intro-layout"><div><p class="eyebrow">CIENCIA · TECNOLOGÍA · TERRITORIO</p><h2>Conocer el litoral.<br><span>Comprender sus cambios.</span></h2></div>
@@ -54,14 +61,58 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
   </div>
 </section>
 <section class="section map-section" id="visor">
-  <div class="section-heading"><div><div class="kicker">02 / EXPLORACIÓN ESPACIAL</div><h2>Visor <span>geoespacial</span></h2></div><p class="section-lead">Explora las capas previstas para el atlas. Las casillas son una demostración de interfaz; todavía no representan capas científicas publicadas.</p></div>
-  <div class="gis-layout">
-    <aside class="layer-panel"><h3>Capas</h3><div class="layer-list">
-      <label><input type="checkbox" data-demo-layer="geologia"> Geología</label><label><input type="checkbox" data-demo-layer="geomorfologia"> Geomorfología</label><label><input type="checkbox" data-demo-layer="perfiles"> Perfiles de playa</label><label><input type="checkbox" data-demo-layer="sedimentologia"> Sedimentología</label><label><input type="checkbox" data-demo-layer="mineralogia"> Mineralogía</label><label><input type="checkbox" data-demo-layer="costa" checked> Línea de costa (demo)</label><label><input type="checkbox" data-demo-layer="vulnerabilidad"> Vulnerabilidad</label><label><input type="checkbox" data-demo-layer="suelo"> Uso de suelo</label><label><input type="checkbox" data-demo-layer="ortomosaicos"> Ortomosaicos</label><label><input type="checkbox" data-demo-layer="huracanes"> Huracanes históricos</label>
-    </div><div class="panel-rule"></div><h3>Herramientas previstas</h3><ul class="tool-list"><li>⌁ Medir distancia</li><li>▱ Medir área</li><li>ⓘ Información</li><li>⤓ Imprimir mapa</li><li>↗ Compartir vista</li></ul></aside>
-    <div class="map-shell"><div class="map-toolbar"><span><i class="dot"></i> VISOR DE DEMOSTRACIÓN</span><span>MANZANILLO, COLIMA</span></div><div id="coastal-map" aria-label="Mapa geográfico de demostración de Manzanillo"></div><div class="map-legend"><span>Geometría de prueba</span><span>Base cartográfica © OpenStreetMap</span></div></div>
-  </div><p class="note">Importante: el polígono incluido en esta versión es ficticio y solo prueba la visualización GeoJSON. No es una delimitación científica, mapa de vulnerabilidad ni resultado del proyecto.</p>
+  <!-- Encabezado del módulo: describe el contenido real disponible en esta versión. -->
+  <div class="section-heading">
+    <div>
+      <div class="kicker">02 / EXPLORACIÓN ESPACIAL</div>
+      <h2>Visor <span>geoespacial</span></h2>
+    </div>
+    <p class="section-lead">Explora los puntos de perfiles costeros y consulta las fotografías asociadas. La información se presenta tal como fue entregada; su interpretación científica debe seguir los criterios del equipo investigador.</p>
+  </div>
+
+  <!-- Bootstrap distribuye el panel informativo y el mapa en columnas adaptables. -->
+  <div class="gis-layout row g-3">
+    <aside class="layer-panel col-12 col-lg-3" aria-label="Información del mapa">
+      <div class="kicker">CAPA DISPONIBLE</div>
+      <h3>Perfiles de playa</h3>
+      <p>El mapa contiene 31 puntos identificados de P01 a P31, con fotografías asociadas a cada perfil.</p>
+      <div class="panel-rule"></div>
+      <h3>Cómo explorar</h3>
+      <ul class="tool-list">
+        <li>Acercar o alejar con los controles del mapa.</li>
+        <li>Arrastrar el mapa para desplazarse por la zona.</li>
+        <li>Seleccionar un punto para consultar su fotografía.</li>
+        <li>Usar el control de zoom para cambiar la escala.</li>
+      </ul>
+      <div class="panel-rule"></div>
+      <p class="note">La capa visible corresponde al archivo recibido. No se presentan aquí índices de vulnerabilidad ni resultados multitemporales.</p>
+    </aside>
+
+    <!-- El iframe aísla las bibliotecas del mapa de los estilos y scripts del sitio principal. -->
+    <div class="map-shell col-12 col-lg-9">
+      <div class="map-toolbar">
+        <span><i class="dot" aria-hidden="true"></i> MAPA INTERACTIVO · PERFILES DE PLAYA</span>
+        <span>MANZANILLO, COLIMA</span>
+      </div>
+      <div class="map-frame-wrap">
+        <iframe
+          class="coastal-map-frame"
+          src="assets/maps/perfiles-costero/index.html"
+          title="Mapa interactivo de perfiles costeros de Manzanillo"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <div class="map-legend">
+        <span>Puntos de perfil y fotografías asociadas</span>
+        <span>Cartografía satelital: atribución en el mapa</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nota de trazabilidad: no confundir esta capa de perfiles con una evaluación de riesgo. -->
+  <p class="note">La integración conserva los puntos y las fotografías del mapa recibido. Antes de la publicación institucional se deberán confirmar la procedencia, los metadatos y las condiciones de uso de la cartografía base.</p>
 </section>
+<!-- Módulo 03: catálogo de modelos tridimensionales. -->
 <section class="section" id="modelos">
   <div class="section-heading"><div><div class="kicker">03 / EXPLORACIÓN TRIDIMENSIONAL</div><h2>Modelos <span>3D</span></h2></div><p class="section-lead">Catálogo preparado para modelos publicados en Sketchfab u otros visores autorizados, según los materiales que entregue el equipo.</p></div>
   <div class="catalog-layout"><aside class="category-panel"><h3>Categorías</h3><button class="category-button is-active" data-model-category="todos">Todas</button><button class="category-button" data-model-category="playas">Playas</button><button class="category-button" data-model-category="acantilados">Acantilados</button><button class="category-button" data-model-category="formaciones">Formaciones</button><button class="category-button" data-model-category="perfiles">Perfiles costeros</button><button class="category-button" data-model-category="fotogrametria">Fotogrametría aérea</button><button class="category-button" data-model-category="topografia">Modelos topográficos</button></aside>
@@ -72,17 +123,20 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
     </div>
   </div><p class="note">Los nombres son referencias de categorías para estructurar la interfaz, no una afirmación de que esos modelos estén ya disponibles.</p>
 </section>
+<!-- Módulo 04: interfaz prevista para el análisis multitemporal. -->
 <section class="section timeline-section" id="tiempo">
   <div class="kicker">04 / ANÁLISIS MULTITEMPORAL</div><h2>Línea del tiempo <span>ambiental</span></h2><p class="section-lead">La arquitectura contempla comparar la evolución de la costa desde 2008 hasta la actualidad. El control siguiente demuestra la interacción; requiere imágenes satelitales validadas para mostrar cambios reales.</p>
   <div class="time-controls"><div class="year-track" role="group" aria-label="Seleccionar año de referencia"><button data-year="2008">2008</button><button data-year="2012">2012</button><button data-year="2015">2015</button><button class="is-active" data-year="2020">2020</button><button data-year="2024">2024</button><button data-year="actualidad">Actualidad</button></div><label class="range-label" for="comparison-slider"><span>Comparar imágenes</span><output id="comparison-output">50%</output></label><input id="comparison-slider" type="range" min="0" max="100" value="50" aria-label="Deslizador de comparación visual"><div class="comparison-demo"><div class="compare-pane compare-before"><span id="compare-left-label">IMAGEN A · REFERENCIA</span><div class="contour contour-a"></div><strong id="compare-left-year">2012</strong></div><div class="compare-pane compare-after"><span id="compare-right-label">IMAGEN B · REFERENCIA</span><div class="contour contour-b"></div><strong id="compare-right-year">2020</strong></div><div class="comparison-divider" id="comparison-divider"><span>↔</span></div><div class="demo-stamp">INTERFAZ DE DEMOSTRACIÓN · SIN IMÁGENES CIENTÍFICAS</div></div>
   <div class="timeline-bottom"><div><h3>Capas comparables</h3><label><input type="checkbox" checked> Línea de costa</label><label><input type="checkbox" checked> Erosión / acumulación</label><label><input type="checkbox"> Ortomosaicos</label><label><input type="checkbox"> Perfiles de playa</label></div><div><h3>Información del periodo</h3><p id="period-description">Periodo de demostración: 2012–2020. Las métricas de cambio se mostrarán cuando se integren los datos procesados.</p><p class="note">La ubicación y temporalidad de huracanes se incorporará con fuentes verificadas.</p></div></div>
 </section>
+<!-- Módulo 05: estructura de consulta para la vulnerabilidad costera. -->
 <section class="section vulnerability-section" id="vulnerabilidad">
   <div class="section-heading"><div><div class="kicker">05 / EVALUACIÓN ESPACIAL</div><h2>Vulnerabilidad <span>costera</span></h2></div><p class="section-lead">Vista de referencia para un mapa temático de vulnerabilidad. La clasificación y los valores reales deben proceder del análisis científico, no de esta maqueta.</p></div>
   <div class="vulnerability-layout"><div class="vulnerability-map"><div class="vuln-map-grid"></div><div class="coast-shape"></div><div class="vulnerability-scale"><h3>Índice de vulnerabilidad</h3><span><i class="v-low"></i> Muy baja</span><span><i class="v-low2"></i> Baja</span><span><i class="v-mid"></i> Media</span><span><i class="v-high"></i> Alta</span><span><i class="v-high2"></i> Muy alta</span><small>LEYENDA ILUSTRATIVA</small></div><div class="vulnerability-callout"><small>SECTOR DE EJEMPLO</small><strong>Sin evaluación</strong><p>Los resultados se integrarán tras validación.</p></div></div>
     <aside class="variables-panel"><h3>Variables consideradas</h3><label><input type="checkbox" checked> Erosión costera</label><label><input type="checkbox" checked> Pendiente del terreno</label><label><input type="checkbox" checked> Tipo de roca / sedimento</label><label><input type="checkbox" checked> Oleaje y exposición</label><label><input type="checkbox" checked> Huracanes históricos</label><label><input type="checkbox" checked> Uso de suelo</label><div class="panel-rule"></div><h3>Metodología</h3><p>La interfaz se reserva para presentar las variables y el método multicriterio documentados por el equipo investigador.</p><span class="status-pill">Capa científica pendiente</span></aside>
   </div>
 </section>
+<!-- Módulo 06: repositorio de datos y productos científicos. -->
 <section class="section results-section" id="resultados">
   <div class="section-heading"><div><div class="kicker">06 / REPOSITORIO CIENTÍFICO</div><h2>Datos y <span>resultados</span></h2></div><p class="section-lead">Catálogo consultable para productos, informes, perfiles topográficos y conjuntos de datos, con filtros y metadatos.</p></div>
   <div class="repository-layout"><aside class="filter-panel"><h3>Filtrar por</h3><label for="filter-type">Tipo de producto</label><select id="filter-type"><option value="todos">Todos</option><option value="mapa">Mapa / SIG</option><option value="perfil">Perfil de playa</option><option value="ortomosaico">Ortomosaico</option><option value="datos">Datos científicos</option><option value="documento">Documento</option></select><label for="filter-site">Playa / sitio</label><select id="filter-site"><option value="todos">Todos</option><option value="manzanillo">Manzanillo</option><option value="miramar">Miramar</option><option value="audiencia">La Audiencia</option><option value="santiago">Santiago</option><option value="ventanas">Ventanas</option></select><label for="filter-year">Año</label><select id="filter-year"><option value="todos">Todos</option><option>2024</option><option>2023</option><option>2020</option><option>2012</option></select><button class="outline-button" id="clear-filters">Limpiar filtros</button></aside>
@@ -96,11 +150,13 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
     </tbody></table></div><p class="note">No se habilitan descargas hasta que existan archivos reales autorizados y sus metadatos.</p></div>
   </div>
 </section>
+<!-- Módulo 07: directorio de participantes e instituciones. -->
 <section class="section participants-section" id="participantes">
   <div class="section-heading"><div><div class="kicker">07 / EQUIPO DEL PROYECTO</div><h2>Participantes <span>e instituciones</span></h2></div><p class="section-lead">Directorio preparado para reconocer al equipo de investigación y las instituciones participantes.</p></div>
   <div class="participant-tabs" role="group" aria-label="Filtrar participantes"><button class="is-active" data-person-category="todos">Todos</button><button data-person-category="investigadores">Investigadores</button><button data-person-category="tecnicos">Técnicos</button><button data-person-category="estudiantes">Estudiantes</button><button data-person-category="instituciones">Instituciones</button><button data-person-category="colaboradores">Colaboradores</button></div>
   <div class="participant-placeholder"><span class="module-icon">♙</span><h3>Directorio por integrar</h3><p>Se incorporarán nombres, adscripciones, roles y enlaces institucionales verificados. No se muestran nombres ficticios.</p><span class="status-pill">Información pendiente de validación</span></div>
 </section>
+<!-- Módulo 08: catálogo de recursos multimedia del litoral. -->
 <section class="section multimedia-section" id="multimedia">
   <div class="section-heading"><div><div class="kicker">08 / ARCHIVO VISUAL</div><h2>Multimedia <span>del litoral</span></h2></div><p class="section-lead">Fotografías, videos y material audiovisual del trabajo de campo y laboratorio, organizados por tipo de recurso.</p></div>
   <div class="media-filters" role="group" aria-label="Filtrar multimedia"><button class="is-active" data-media-category="todos">Todos</button><button data-media-category="fotografias">Fotografías</button><button data-media-category="videos">Videos</button><button data-media-category="drones">Drones</button><button data-media-category="campo">Trabajo de campo</button><button data-media-category="laboratorio">Laboratorio</button></div>

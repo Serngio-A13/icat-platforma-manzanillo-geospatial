@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <!-- Codificación y adaptación inicial a la pantalla del dispositivo. -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Estilos de Leaflet y de la exportación cartográfica de QGIS. -->
+    <link rel="stylesheet" href="css/leaflet.css">
+    <link rel="stylesheet" href="css/qgis2web.css">
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
+
+    <!-- Ajustes propios para que el mapa ocupe el iframe y responda a móviles. -->
+    <link rel="stylesheet" href="css/mapa-personalizado.css">
+
+    <title>Perfiles costeros de Manzanillo</title>
+</head>
+<body>
+    <!-- Contenedor que Leaflet convertirá en un mapa interactivo. -->
+    <div id="map" role="application" aria-label="Mapa interactivo de perfiles costeros de Manzanillo"></div>
+
+    <!-- Bibliotecas locales: se cargan en orden porque unas dependen de otras. -->
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/rbush.min.js"></script>
+    <script src="js/labelgun.min.js"></script>
+    <script src="js/labels.js"></script>
+
+    <!-- Datos geográficos exportados desde QGIS; incluye coordenadas y nombre de imagen. -->
+    <script src="data/PUNTOSDEPERFIL_1.js"></script>
+
+    <script>
+        // Inicializa el mapa sin fijar una vista inicial: se calculará a partir de todos los puntos.
+        var map = L.map('map', {
+            zoomControl: false, // Los controles de zoom se agregan en la posición indicada abajo.
+            maxZoom: 28,         // Límite de acercamiento permitido en el visor.
+            minZoom: 1            // Límite de alejamiento permitido en el visor.
+        });
+
+        // Agrega el control de acercamiento y alejamiento en la esquina superior izquierda.
+        L.control.zoom({ position: 'topleft' }).addTo(map);
+
+        // Conserva la atribución de las herramientas con las que se generó el mapa.
+        map.attributionControl.setPrefix(
+            '<a href="https://github.com/qgis2web/qgis2web" target="_blank" rel="noopener noreferrer">qgis2web</a> · ' +
+            '<a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet</a> · ' +
+            '<a href="https://qgis.org" target="_blank" rel="noopener noreferrer">QGIS</a>'
+        );
+
+        // Permite representar la posición y el nivel de zoom en la dirección del navegador.
+        var hash = new L.Hash(map);
+
+        // Escapa caracteres HTML para que los textos se muestren como contenido y no como marcado.
+        function escaparHTML(valor) {
+            return String(valor).replace(/[&<>"']/g, function (caracter) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[caracter];
+            });
+        }
+
+        // Construye la ventana emergente asociada a cada punto de perfil costero.
+        function mostrarInformacionPerfil(feature, capa) {
+            // Lee el identificador del perfil o utiliza un texto alternativo si no está disponible.
+            var perfil = feature.properties && feature.properties.Perfil
+                ? String(feature.properties.Perfil)
+                : 'Perfil sin identificar';
+
+            // El archivo de datos usa "imagenesp/P01.jpeg", mientras que la exportación guarda
+            // los archivos como "images/imagenesp_P01.jpeg"; aquí se normaliza esa diferencia.
+            var tieneImagen = Boolean(feature.properties && feature.properties.Imagen);
+            var nombreArchivo = tieneImagen
+                ? 'imagenesp_' + String(feature.properties.Imagen).split('/').pop().replace(/[^a-zA-Z0-9._-]/g, '')
+                : '';
+
+            // Genera el bloque de imagen solo cuando el registro tiene una referencia asociada.
+            var bloqueImagen = tieneImagen
+                ? '<img src="images/' + nombreArchivo + '" alt="Fotografía del perfil ' +
+                    escaparHTML(perfil) + '" loading="lazy">'
+                : '<p>No hay una fotografía asociada a este punto.</p>';
+
+            // Forma el contenido de la ventana emergente con el nombre y la fotografía.
+            var contenido = '<div class="perfil-popup">' +
+                '<h2>' + escaparHTML(perfil) + '</h2>' +
+                bloqueImagen +
+                '</div>';
+
+            // Asocia el contenido al punto y limita su tamaño para evitar que desborde la pantalla.
+            capa.bindPopup(contenido, { maxWidth: 360, maxHeight: 400 });
+        }
+
+        // Define la apariencia de los puntos que representan los perfiles.
+        function estiloPuntoPerfil() {
+            return {
+                radius: 6,              // Radio del símbolo en píxeles.
+                color: '#ff0200',       // Color del borde del punto.
+                weight: 2,              // Grosor del borde.
+                fillColor: '#faff39',   // Color de relleno del punto.
+                fillOpacity: 1,         // Opacidad del relleno.
+                interactive: true       // Permite seleccionar el punto con el cursor o el tacto.
+            };
+        }
+
+        // Crea la capa a partir de la colección de puntos exportada por QGIS.
+        var capaPerfiles = L.geoJSON(json_PUNTOSDEPERFIL_1, {
+            onEachFeature: mostrarInformacionPerfil, // Asocia cada punto con su ventana emergente.
+            pointToLayer: function (feature, latlng) {
+                // Representa cada coordenada como un marcador circular.
+                return L.circleMarker(latlng, estiloPuntoPerfil());
+            }
+        });
+
+        // Añade la capa de perfiles al mapa.
+        capaPerfiles.addTo(map);
+
+        // Ajusta la vista para mostrar todos los perfiles, no solo una parte del litoral.
+        if (capaPerfiles.getBounds().isValid()) {
+            map.fitBounds(capaPerfiles.getBounds().pad(0.12));
+        } else {
+            // Vista de respaldo por si en el futuro la capa llega vacía.
+            map.setView([19.105, -104.37], 12);
+        }
+
+        // Añade una etiqueta permanente a cada punto y registra las etiquetas para evitar solapamientos.
+        var indiceEtiqueta = 0;
+        capaPerfiles.eachLayer(function (capa) {
+            var nombrePerfil = capa.feature.properties && capa.feature.properties.Perfil
+                ? escaparHTML(capa.feature.properties.Perfil)
+                : '';
+
+            capa.bindTooltip(nombrePerfil, {
+                permanent: true,             // Mantiene visible el identificador del perfil.
+                direction: 'top',            // Sitúa la etiqueta encima del punto.
+                offset: [0, -10],            // Separa la etiqueta del símbolo.
+                className: 'etiqueta-perfil' // Permite personalizar su apariencia mediante CSS.
+            });
+
+            labels.push(capa);       // Añade la capa al conjunto de etiquetas administradas.
+            totalMarkers += 1;       // Mantiene el conteo utilizado por el exportador qgis2web.
+            capa.added = true;       // Indica al administrador de etiquetas que la capa ya está añadida.
+            addLabel(capa, indiceEtiqueta);
+            indiceEtiqueta += 1;
+        });
+
+        // Recalcula las etiquetas al finalizar la carga inicial del mapa.
+        resetLabels([capaPerfiles]);
+
+        // Recalcula las etiquetas cuando cambia el nivel de zoom o se modifica la visibilidad de capas.
+        map.on('zoomend', function () {
+            resetLabels([capaPerfiles]);
+        });
+        map.on('layeradd', function () {
+            resetLabels([capaPerfiles]);
+        });
+        map.on('layerremove', function () {
+            resetLabels([capaPerfiles]);
+        });
+
+        // Informa al mapa del tamaño del contenedor una vez que el documento ya está dibujado.
+        window.addEventListener('load', function () {
+            map.invalidateSize();
+        });
+    </script>
+</body>
+</html>
