@@ -263,3 +263,26 @@ body.modal-open {
         padding-right: 14px;
     }
 }
+
+
+/* Los iconos de cada mapa son controles interactivos que abren la misma vista previa. */
+.map-icon-button {
+    padding: 0;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.map-icon-button:hover,
+.map-icon-button:focus-visible {
+    background: #173b48;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    outline: 2px solid #54dff055;
+    outline-offset: 2px;
+}
+
+.map-modal-actions #research-map-download {
+    padding: 0 16px;
+}
