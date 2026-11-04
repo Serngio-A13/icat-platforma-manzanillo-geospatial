@@ -1,0 +1,53 @@
+/* Ajustes responsivos del Atlas.
+   Bootstrap proporciona la cuadrícula; estas reglas adaptan el contenedor del mapa integrado. */
+
+/* Permite que las columnas de Bootstrap controlen el panel informativo y el mapa. */
+.gis-layout.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+/* El marco ocupa todo el ancho de la columna y no muestra bordes propios del navegador. */
+.map-frame-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #0b1c25;
+}
+
+/* La altura se adapta al tamaño de pantalla sin dejar el mapa demasiado pequeño. */
+.coastal-map-frame {
+    display: block;
+    width: 100%;
+    height: clamp(430px, 68vh, 720px);
+    border: 0;
+    background: #0b1c25;
+}
+
+/* Permite que las etiquetas de la barra se acomoden en varias líneas en tabletas. */
+@media (max-width: 760px) {
+    .coastal-map-frame {
+        height: 65vh;
+        min-height: 420px;
+    }
+
+    .map-toolbar,
+    .map-legend {
+        flex-wrap: wrap;
+    }
+}
+
+/* Reserva más espacio vertical al mapa en teléfonos pequeños. */
+@media (max-width: 480px) {
+    .coastal-map-frame {
+        height: 62vh;
+        min-height: 400px;
+    }
+
+    .map-toolbar,
+    .map-legend {
+        gap: 8px;
+        font-size: 8px;
+    }
+}

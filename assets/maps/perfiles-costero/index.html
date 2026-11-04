@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <!-- Codificación y adaptación inicial a la pantalla del dispositivo. -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Estilos de Leaflet y de la exportación cartográfica de QGIS. -->
+    <link rel="stylesheet" href="css/leaflet.css">
+    <link rel="stylesheet" href="css/qgis2web.css">
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
+
+    <!-- Ajustes propios para que el mapa ocupe el iframe y responda a móviles. -->
+    <link rel="stylesheet" href="css/mapa-personalizado.css">
+
+    <title>Perfiles costeros de Manzanillo</title>
+</head>
+<body>
+    <!-- Contenedor que Leaflet convertirá en un mapa interactivo. -->
+    <div id="map" role="application" aria-label="Mapa interactivo de perfiles costeros de Manzanillo"></div>
+
+    <!-- Bibliotecas locales: se cargan en orden porque unas dependen de otras. -->
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/rbush.min.js"></script>
+    <script src="js/labelgun.min.js"></script>
+    <script src="js/labels.js"></script>
+
+    <!-- Datos geográficos exportados desde QGIS; incluye coordenadas y nombre de imagen. -->
+    <script src="data/PUNTOSDEPERFIL_1.js"></script>
+
+    <script>
+        // Inicializa el mapa; la vista se calcula posteriormente a partir de todos los puntos.
+        var map = L.map('map', {
+            zoomControl: false,
+            maxZoom: 19,
+            minZoom: 1
+        });
+
+        // Agrega el control de acercamiento y alejamiento en la esquina superior izquierda.
+        L.control.zoom({ position: 'topleft' }).addTo(map);
+
+        // Capa base de imágenes satelitales con atribución visible del proveedor.
+        var capaSatelital = L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            {
+                maxZoom: 19,
+                attribution: 'Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+            }
+        ).addTo(map);
+
+        // Conserva la atribución de las herramientas con las que se generó el mapa.
+        map.attributionControl.setPrefix(
+            '<a href="https://github.com/qgis2web/qgis2web" target="_blank" rel="noopener noreferrer">qgis2web</a> · ' +
+            '<a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet</a> · ' +
+            '<a href="https://qgis.org" target="_blank" rel="noopener noreferrer">QGIS</a>'
+        );
+
+        // Permite representar la posición y el nivel de zoom en la dirección del navegador.
+        var hash = new L.Hash(map);
+
+        // Escapa caracteres HTML para que los textos se muestren como contenido y no como marcado.
+        function escaparHTML(valor) {
+            return String(valor).replace(/[&<>"']/g, function (caracter) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[caracter];
+            });
+        }
+
+        // Construye la ventana emergente asociada a cada punto de perfil costero.
+        function mostrarInformacionPerfil(feature, capa) {
+            // Lee el identificador del perfil o utiliza un texto alternativo si no está disponible.
+            var perfil = feature.properties && feature.properties.Perfil
+                ? String(feature.properties.Perfil)
+                : 'Perfil sin identificar';
+
+            // Convierte la ruta exportada desde QGIS al nombre real del archivo local.
+            var tieneImagen = Boolean(feature.properties && feature.properties.Imagen);
+            var nombreArchivo = tieneImagen
+                ? 'imagenesp_' + String(feature.properties.Imagen).split('/').pop().replace(/[^a-zA-Z0-9._-]/g, '')
+                : '';
+
+            // Inserta la imagen directamente en la ventana, sin enlaces ni pestañas adicionales.
+            var bloqueImagen = tieneImagen
+                ? '<img src="images/' + nombreArchivo + '" alt="Fotografía o gráfica del perfil ' +
+                    escaparHTML(perfil) + '" loading="lazy">'
+                : '<p>No hay una imagen asociada a este punto.</p>';
+
+            // Forma el contenido de la ventana emergente con el nombre y la imagen.
+            var contenido = '<div class="perfil-popup">' +
+                '<h2>' + escaparHTML(perfil) + '</h2>' +
+                bloqueImagen +
+                '</div>';
+
+            // Usa una ventana amplia y limita su altura a la pantalla disponible.
+            capa.bindPopup(contenido, {
+                maxWidth: window.innerWidth < 600 ? 340 : 820,
+                minWidth: window.innerWidth < 600 ? 240 : 480,
+                maxHeight: Math.round(window.innerHeight * 0.86),
+                autoPan: true,
+                keepInView: true
+            });
+        }
+
+        // Define la apariencia de los puntos que representan los perfiles.
+        function estiloPuntoPerfil() {
+            return {
+                radius: 6,
+                color: '#ff0200',
+                weight: 2,
+                fillColor: '#faff39',
+                fillOpacity: 1,
+                interactive: true
+            };
+        }
+
+        // Crea la capa a partir de la colección de puntos exportada por QGIS.
+        var capaPerfiles = L.geoJSON(json_PUNTOSDEPERFIL_1, {
+            onEachFeature: mostrarInformacionPerfil,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, estiloPuntoPerfil());
+            }
+        });
+
+        // Añade la capa de perfiles encima de la capa satelital.
+        capaPerfiles.addTo(map);
+
+        // Ajusta la vista para mostrar todos los perfiles.
+        if (capaPerfiles.getBounds().isValid()) {
+            map.fitBounds(capaPerfiles.getBounds().pad(0.12));
+        } else {
+            map.setView([19.105, -104.37], 12);
+        }
+
+        // Añade una etiqueta permanente a cada punto y registra las etiquetas para evitar solapamientos.
+        var indiceEtiqueta = 0;
+        capaPerfiles.eachLayer(function (capa) {
+            var nombrePerfil = capa.feature.properties && capa.feature.properties.Perfil
+                ? escaparHTML(capa.feature.properties.Perfil)
+                : '';
+
+            capa.bindTooltip(nombrePerfil, {
+                permanent: true,
+                direction: 'top',
+                offset: [0, -10],
+                className: 'etiqueta-perfil'
+            });
+
+            labels.push(capa);
+            totalMarkers += 1;
+            capa.added = true;
+            addLabel(capa, indiceEtiqueta);
+            indiceEtiqueta += 1;
+        });
+
+        // Recalcula las etiquetas al finalizar la carga inicial del mapa.
+        resetLabels([capaPerfiles]);
+
+        // Recalcula las etiquetas cuando cambia el nivel de zoom o la visibilidad de capas.
+        map.on('zoomend', function () {
+            resetLabels([capaPerfiles]);
+        });
+        map.on('layeradd', function () {
+            resetLabels([capaPerfiles]);
+        });
+        map.on('layerremove', function () {
+            resetLabels([capaPerfiles]);
+        });
+
+        // Informa a Leaflet del tamaño real del contenedor tras dibujarse la página.
+        window.addEventListener('load', function () {
+            map.invalidateSize();
+        });
+
+        // Recalcula el tamaño del mapa si cambia la ventana del navegador.
+        window.addEventListener('resize', function () {
+            map.invalidateSize();
+        });
+    </script>
+</body>
+</html>
