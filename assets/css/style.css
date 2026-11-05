@@ -39,3 +39,37 @@
         background-position: center, center, 58% center;
     }
 }
+
+
+/* ==========================================================================
+   AJUSTE DE PORTADA: fotografía más visible y menos oscurecida.
+   La imagen hero-playa-drone.webp se conserva como fondo; se reducen las
+   capas oscuras para mejorar su nitidez percibida sin perder legibilidad.
+   ========================================================================== */
+.hero {
+    background-image:
+        linear-gradient(90deg, rgb(4 17 24 / 46%) 0%, rgb(4 17 24 / 22%) 48%, rgb(4 17 24 / 3%) 100%),
+        linear-gradient(0deg, rgb(4 17 24 / 22%) 0%, transparent 48%),
+        url('../images/hero-playa-drone.webp');
+    background-position: center, center, center 54%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Se retira el degradado duplicado del pseudo-elemento; solo queda la retícula
+   técnica sutil que forma parte del diseño original de la portada. */
+.hero:before {
+    background:
+        repeating-linear-gradient(0deg, transparent 0 48px, rgba(84, 223, 240, .035) 49px 50px),
+        repeating-linear-gradient(90deg, transparent 0 48px, rgba(84, 223, 240, .035) 49px 50px);
+}
+
+@media (max-width: 700px) {
+    .hero {
+        background-image:
+            linear-gradient(90deg, rgb(4 17 24 / 48%) 0%, rgb(4 17 24 / 22%) 100%),
+            linear-gradient(0deg, rgb(4 17 24 / 24%) 0%, transparent 58%),
+            url('../images/hero-playa-drone.webp');
+        background-position: center, center, 58% center;
+    }
+}
