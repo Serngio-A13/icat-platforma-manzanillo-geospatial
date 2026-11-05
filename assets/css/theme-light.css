@@ -719,3 +719,161 @@ td {
 }
 
 /* Fin de la iconografía SVG de los módulos principales. */
+
+
+/* ==========================================================================
+   18. LEGIBILIDAD Y ACCESIBILIDAD TIPOGRÁFICA
+   --------------------------------------------------------------------------
+   Se aumenta el peso tipográfico y el contraste para facilitar la lectura.
+   No se aplica negrita extrema a todos los elementos: el cuerpo usa peso
+   medio/seminegrita y los títulos conservan una jerarquía más marcada.
+   ========================================================================== */
+
+body {
+    color: #243B48;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: auto;
+    text-rendering: optimizeLegibility;
+}
+
+/* Encabezados: mayor peso y contraste para identificar secciones rápidamente. */
+h1, h2, h3, h4, h5, h6,
+.section-heading,
+.section-heading h2,
+.project-tabs h3,
+.repository-head h3,
+.participant-placeholder h3 {
+    color: #123B50;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+/* Texto de lectura: peso medio y azul grisáceo oscuro. */
+p,
+li,
+.section-lead,
+.intro-copy,
+.tab-panel p,
+.model-card p,
+.multimedia-grid p,
+.note,
+.tool-list,
+.timeline-bottom p,
+.repository-head p,
+.footer-top p,
+.research-map-card p,
+.research-photo-grid article > p,
+.participant-placeholder p,
+.map-modal-note {
+    color: #354F5D;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+/* Enlaces y navegación: mayor grosor sin perder el estilo sobrio. */
+nav a,
+.quick-links a,
+.quick-links strong,
+.outline-button,
+button,
+input,
+select,
+textarea,
+.map-open-button,
+.research-map-card a,
+.research-photo-grid .text-link {
+    font-weight: 600;
+}
+
+nav a {
+    color: #294958;
+    font-size: 14px;
+}
+
+/* Etiquetas, metadatos y textos pequeños: evitar pesos demasiado ligeros. */
+small,
+caption,
+.kicker,
+.eyebrow,
+.brand small,
+.model-card-body small,
+.multimedia-grid small,
+.research-map-card small,
+.footer-bottom,
+.hero-meta,
+.filter-panel label,
+.variables-panel label,
+.layer-list label,
+.timeline-bottom label,
+.range-label {
+    font-weight: 600;
+}
+
+/* Controles de consulta y tablas: texto más oscuro y fácil de distinguir. */
+label,
+th,
+td,
+.map-legend,
+.pdf-viewer-toolbar,
+#pdf-page-status {
+    color: #294958;
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    color: #243B48;
+    font-size: 16px;
+}
+
+/* La portada conserva sus textos claros sobre la fotografía, pero gana peso. */
+.hero h1,
+.hero p,
+.hero .hero-meta,
+.hero .hero-aside {
+    font-weight: 600;
+}
+
+.hero h1 {
+    font-weight: 700;
+}
+
+/* Los iconos conservan su trazo fino; no se engrosan junto con la tipografía. */
+.quick-links .module-icon svg {
+    stroke-width: 1.8;
+}
+
+/* En móvil se mantiene un tamaño legible, evitando reducir textos a microtipografía. */
+@media (max-width: 700px) {
+    body,
+    p,
+    li,
+    .section-lead,
+    .intro-copy,
+    .tab-panel p,
+    .model-card p,
+    .multimedia-grid p,
+    .note,
+    .tool-list,
+    .timeline-bottom p {
+        font-size: 15px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .quick-links strong {
+        font-size: 14px;
+    }
+
+    .quick-links small {
+        font-size: 13px;
+    }
+}
+
+/* Fin de los ajustes tipográficos de accesibilidad. */
