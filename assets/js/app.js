@@ -79,22 +79,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterYear = document.getElementById('filter-year');
   const resultRows = [...document.querySelectorAll('#results-body tr')];
   const resultCount = document.getElementById('result-count');
-  const filterResults = () => {
-    let count = 0;
-    resultRows.forEach(row => {
-      const match = (filterType.value === 'todos' || row.dataset.type === filterType.value) &&
-        (filterSite.value === 'todos' || row.dataset.site === filterSite.value) &&
-        (filterYear.value === 'todos' || row.dataset.year === filterYear.value);
-      row.hidden = !match;
-      if (match) count++;
+
+  // Enlaza los filtros únicamente cuando la página contiene todos sus controles.
+  // Esto permite reutilizar app.js en módulos independientes sin errores.
+  if (filterType && filterSite && filterYear && resultCount) {
+    const filterResults = () => {
+      let count = 0;
+      resultRows.forEach(row => {
+        const match = (filterType.value === 'todos' || row.dataset.type === filterType.value) &&
+          (filterSite.value === 'todos' || row.dataset.site === filterSite.value) &&
+          (filterYear.value === 'todos' || row.dataset.year === filterYear.value);
+        row.hidden = !match;
+        if (match) count++;
+      });
+      resultCount.textContent = count + ' registros de muestra';
+    };
+    [filterType, filterSite, filterYear].forEach(select => select.addEventListener('change', filterResults));
+    document.getElementById('clear-filters')?.addEventListener('click', () => {
+      filterType.value = filterSite.value = filterYear.value = 'todos';
+      filterResults();
     });
-    resultCount.textContent = count + ' registros de muestra';
-  };
-  [filterType, filterSite, filterYear].forEach(select => select.addEventListener('change', filterResults));
-  document.getElementById('clear-filters')?.addEventListener('click', () => {
-    filterType.value = filterSite.value = filterYear.value = 'todos';
-    filterResults();
-  });
+  }
 
   // Marca la categoría seleccionada en el directorio de participantes.
   document.querySelectorAll('[data-person-category]').forEach(button => button.addEventListener('click', () => {
