@@ -1,0 +1,16 @@
+{
+  "type": "FeatureCollection",
+  "name": "demo_manzanillo_ilustrativo",
+  "features": [{
+    "type": "Feature",
+    "properties": {
+      "name": "Polígono ilustrativo de demostración",
+      "status": "demo_only",
+      "note": "Geometría ficticia para probar la visualización. No representa resultados ni delimitaciones oficiales."
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [[[-104.38,19.00],[-104.29,19.00],[-104.27,19.07],[-104.34,19.10],[-104.38,19.00]]]
+    }
+  }]
+}
