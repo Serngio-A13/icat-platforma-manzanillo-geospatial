@@ -518,3 +518,154 @@ footer {
 }
 
 /* Fin del tema claro. Las reglas responsivas originales siguen vigentes. */
+
+
+/* ==========================================================================
+   PORTADA INMERSIVA, ACCESOS RÁPIDOS Y LEGIBILIDAD GENERAL
+   --------------------------------------------------------------------------
+   Se añade un marcador de geolocalización decorativo sobre la fotografía.
+   No representa una posición GPS en tiempo real ni sustituye datos SIG.
+   ========================================================================== */
+
+/* 14. Marcador circular animado para reforzar la identidad geoespacial. */
+.hero::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 48%;
+    right: 24%;
+    width: clamp(112px, 13vw, 178px);
+    aspect-ratio: 1;
+    border: 1px solid rgb(139 224 234 / 78%);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, rgb(139 224 234 / 90%) 0 3px, transparent 4px),
+        radial-gradient(circle, transparent 0 34%, rgb(139 224 234 / 18%) 35% 35.5%, transparent 36%),
+        radial-gradient(circle, transparent 0 63%, rgb(139 224 234 / 24%) 63.5% 64%, transparent 64.5%);
+    box-shadow:
+        0 0 0 12px rgb(139 224 234 / 8%),
+        0 0 0 28px rgb(139 224 234 / 5%),
+        inset 0 0 24px rgb(139 224 234 / 10%),
+        0 0 24px rgb(139 224 234 / 22%);
+    transform: translateY(-50%);
+    pointer-events: none;
+    animation: hero-location-pulse 4.2s ease-in-out infinite;
+}
+
+/* Pulso tenue: evita competir con el título y la fotografía aérea. */
+@keyframes hero-location-pulse {
+    0%, 100% {
+        opacity: .68;
+        scale: .96;
+    }
+    50% {
+        opacity: 1;
+        scale: 1.04;
+    }
+}
+
+/* 15. Mejora de lectura para textos de contenido y navegación. */
+body {
+    font-size: 16px;
+    color: #243B48;
+}
+
+nav a {
+    color: #405B69;
+    font-size: 13px;
+}
+
+.brand small {
+    color: #526B78;
+    font-size: 11px;
+}
+
+.section-lead,
+.intro-copy,
+.tab-panel p,
+.model-card p,
+.multimedia-grid p,
+.note,
+.tool-list,
+.timeline-bottom p,
+.filter-panel label,
+.variables-panel label,
+.layer-list label,
+td {
+    color: #405866;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.quick-links strong {
+    color: #123B50;
+    font-size: 15px;
+}
+
+.quick-links small {
+    color: #526B78;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.kicker,
+.eyebrow,
+.model-card-body small,
+.multimedia-grid small,
+.research-map-card small {
+    font-size: 11px;
+    letter-spacing: .12em;
+}
+
+/* Los cinco accesos usan una caja consistente para dar más presencia
+   a los símbolos actuales mientras se confirma el paquete gráfico oficial. */
+.module-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+    border: 1px solid #B9DCE5;
+    border-radius: 14px;
+    background: #EAF5F8;
+    color: #126F8C;
+    font-size: 27px;
+    line-height: 1;
+}
+
+/* 16. Ajustes para pantallas pequeñas y preferencias de movimiento reducido. */
+@media (max-width: 700px) {
+    .hero::after {
+        top: 24%;
+        right: 10%;
+        width: 92px;
+        opacity: .55;
+    }
+
+    .section-lead,
+    .intro-copy,
+    .tab-panel p,
+    .model-card p,
+    .multimedia-grid p,
+    .note,
+    .tool-list,
+    .timeline-bottom p {
+        font-size: 14px;
+    }
+
+    .quick-links strong {
+        font-size: 13px;
+    }
+
+    .quick-links small {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero::after {
+        animation: none;
+    }
+}
+
+/* Fin de los ajustes de portada y legibilidad. */
