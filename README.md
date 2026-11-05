@@ -55,3 +55,15 @@ La portada utiliza la imagen `assets/images/hero-playa-drone.webp` como fondo. P
 El archivo `assets/css/style.css` controla el encuadre y las capas de contraste de la fotografía. El ajuste más reciente reduce la intensidad de los degradados oscuros y elimina el degradado duplicado del pseudo-elemento `.hero:before`, manteniendo únicamente una retícula técnica muy tenue. En pantallas pequeñas se aplica un encuadre independiente dentro de `@media (max-width: 700px)`.
 
 Si se vuelve a modificar la portada, comprobar la legibilidad del título, botones y metadatos tanto en escritorio como en móvil. La imagen debe permanecer en `assets/images/hero-playa-drone.webp` y el tema claro `assets/css/theme-light.css` debe seguir cargándose después de las hojas de estilo generales.
+
+
+## Portada inmersiva, accesos e identidad visual
+
+- La portada incorpora un marcador circular animado mediante el pseudo-elemento `.hero::after` de `assets/css/theme-light.css`. El efecto es decorativo: no solicita geolocalización del navegador ni representa coordenadas GPS en tiempo real.
+- El marcador utiliza CSS, por lo que no agrega bibliotecas ni archivos multimedia adicionales. Su animación se desactiva cuando el visitante tiene activada la preferencia de movimiento reducido.
+- La fotografía `assets/images/hero-playa-drone.webp` continúa como fondo principal. La hoja de estilos queda preparada para que, cuando el equipo proporcione un video aéreo autorizado, pueda incorporarse como fondo con la fotografía actual como respaldo.
+- Los cinco accesos rápidos conservan sus destinos funcionales: visor geoespacial, modelos 3D, línea del tiempo, vulnerabilidad costera y datos/resultados. Se aumentó el tamaño de sus símbolos actuales y se les dio un contenedor visual consistente.
+- La correspondencia exacta de los iconos con el sitio de referencia deberá confirmarse con los archivos gráficos originales o una captura clara del bloque de accesos; no se deben sustituir por iconos aproximados si el equipo exige reproducirlos literalmente.
+- Se reforzó el contraste y el tamaño de textos de navegación, descripciones, tarjetas, notas y controles. El texto blanco del hero se conserva para mantener su legibilidad sobre la fotografía.
+- Validar escritorio y móvil, revisar que el marcador no cubra el título ni controles, y confirmar que el efecto se desactive con `prefers-reduced-motion`.
+- Cuando se reciba el video de dron, comprobar duración, peso, derechos de uso, compatibilidad MP4/WebM y versión de respaldo antes de publicarlo.
