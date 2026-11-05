@@ -83,3 +83,10 @@ Se añadió un bloque de accesibilidad tipográfica al final de `assets/css/them
 En móvil se evita reducir el texto de lectura por debajo de 15 px y los accesos rápidos mantienen tamaños legibles. Los iconos SVG conservan su trazo original para no alterar la referencia visual.
 
 Al validar este ajuste, revisar párrafos largos, etiquetas, navegación, tablas, formularios, tarjetas y la portada en escritorio y móvil. Si la fuente utilizada no dispone de un peso específico, el navegador puede aproximar el grosor; comprobar que las letras no se vean excesivamente pesadas ni pierdan definición.
+
+
+### Color azul de Prusia para los iconos de portada
+
+Se actualizó el color de los cinco iconos SVG principales en `assets/css/theme-light.css`. El trazo utiliza azul de Prusia `#003153` y cambia a un azul ligeramente más luminoso `#164B72` al pasar el cursor. Se incorporó un fondo claro semitransparente y discreto detrás de cada símbolo para conservar el contraste sobre la fotografía aérea. Las formas SVG, sus dimensiones, sus enlaces y su accesibilidad no se modificaron.
+
+Al validar, revisar que los cinco iconos se distingan sobre las zonas claras y oscuras de la fotografía, tanto en escritorio como en móvil. Si el fondo de la portada cambia, volver a comprobar el contraste antes de ajustar el color.
