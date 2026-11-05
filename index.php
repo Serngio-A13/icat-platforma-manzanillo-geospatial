@@ -49,11 +49,27 @@ $pageTitle = 'Atlas digital del litoral de Manzanillo | PAPIIT IF100926';
 </section>
 <!-- Accesos rápidos: enlazan con los módulos principales de la plataforma. -->
 <section class="quick-links" id="servicios" aria-label="Módulos principales">
-  <a href="#visor"><span class="module-icon">⌖</span><strong>Visor geoespacial</strong><small>Mapas y capas temáticas</small><b>↗</b></a>
-  <a href="#modelos"><span class="module-icon">◇</span><strong>Modelos 3D</strong><small>Playas, acantilados y relieve</small><b>↗</b></a>
-  <a href="#tiempo"><span class="module-icon">◷</span><strong>Línea del tiempo</strong><small>Cambios del litoral</small><b>↗</b></a>
-  <a href="#vulnerabilidad"><span class="module-icon">≋</span><strong>Vulnerabilidad costera</strong><small>Variables y niveles de riesgo</small><b>↗</b></a>
-  <a href="#resultados"><span class="module-icon">▤</span><strong>Datos y resultados</strong><small>Consulta de productos científicos</small><b>↗</b></a>
+  <!-- Iconos SVG propios: reproducen los cinco símbolos lineales de la referencia visual. -->
+  <a href="#visor">
+    <span class="module-icon" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><path d="M16 28s10-9.2 10-16A10 10 0 0 0 6 12c0 6.8 10 16 10 16Z"/><circle cx="16" cy="12" r="3.2"/></svg></span>
+    <strong>Visor geoespacial</strong><small>Mapas y capas temáticas</small><b>↗</b>
+  </a>
+  <a href="#modelos">
+    <span class="module-icon" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><path d="m16 2.8 12 6.5v13.4L16 29.2 4 22.7V9.3L16 2.8Z"/><path d="m4.4 9.5 11.6 6.4 11.6-6.4M16 16v13"/></svg></span>
+    <strong>Modelos 3D</strong><small>Playas, acantilados y relieve</small><b>↗</b>
+  </a>
+  <a href="#tiempo">
+    <span class="module-icon" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><circle cx="16" cy="16" r="13"/><path d="M16 8v8l5.5 3"/></svg></span>
+    <strong>Línea del tiempo</strong><small>Cambios del litoral</small><b>↗</b>
+  </a>
+  <a href="#vulnerabilidad">
+    <span class="module-icon" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><path d="M2 10c4.7-6 8.5-6 13.2 0s8.5 6 14.8 0M2 17c4.7-6 8.5-6 13.2 0s8.5 6 14.8 0M2 24c4.7-6 8.5-6 13.2 0s8.5 6 14.8 0"/></svg></span>
+    <strong>Vulnerabilidad costera</strong><small>Variables y niveles de riesgo</small><b>↗</b>
+  </a>
+  <a href="#resultados">
+    <span class="module-icon" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><ellipse cx="16" cy="6.5" rx="11.5" ry="4"/><path d="M4.5 6.5v19c0 2.2 5.2 4 11.5 4s11.5-1.8 11.5-4v-19M4.5 16c0 2.2 5.2 4 11.5 4s11.5-1.8 11.5-4"/></svg></span>
+    <strong>Datos y resultados</strong><small>Consulta de productos científicos</small><b>↗</b>
+  </a>
 </section>
 <!-- Módulo 01: descripción, objetivos y metodología del proyecto. -->
 <section class="section" id="proyecto">
