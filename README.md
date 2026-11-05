@@ -90,3 +90,34 @@ Al validar este ajuste, revisar párrafos largos, etiquetas, navegación, tablas
 Se actualizó el color de los cinco iconos SVG principales en `assets/css/theme-light.css`. El trazo utiliza azul de Prusia `#003153` y cambia a un azul ligeramente más luminoso `#164B72` al pasar el cursor. Se incorporó un fondo claro semitransparente y discreto detrás de cada símbolo para conservar el contraste sobre la fotografía aérea. Las formas SVG, sus dimensiones, sus enlaces y su accesibilidad no se modificaron.
 
 Al validar, revisar que los cinco iconos se distingan sobre las zonas claras y oscuras de la fotografía, tanto en escritorio como en móvil. Si el fondo de la portada cambia, volver a comprobar el contraste antes de ajustar el color.
+
+
+## Arquitectura de navegación por páginas independientes
+
+La portada se reorganizó como entrada visual del Atlas y cada módulo tiene una URL propia:
+
+- `index.php`: fotografía aérea, título y cinco accesos SVG principales.
+- `pages/proyecto.php`: introducción, objetivos, metodología y área de estudio.
+- `pages/visor.php`: visor de perfiles costeros y mapa integrado.
+- `pages/modelos.php`: catálogo de modelos 3D.
+- `pages/timeline.php`: interfaz de comparación temporal.
+- `pages/peligro-costero.php`: apartado de vulnerabilidad costera.
+- `pages/resultados.php`: mapas PDF y ventana de consulta PDF.js.
+- `pages/multimedia.php`: galería fotográfica.
+- `pages/participantes.php`: directorio pendiente de información validada.
+
+### Componentes compartidos
+
+- `components/loader.php`: calcula la ruta base de la instalación para raíz y /pages.
+- `components/hero.php`: portada y cinco iconos SVG.
+- `components/navbar.php`: navegación común de páginas interiores.
+- `components/footer.php`: pie de página y retorno a la portada.
+- `components/scripts.php`: scripts comunes y carga condicional de PDF.js.
+
+Los contenidos originales se trasladaron a su página correspondiente y conservan sus avisos de información pendiente de validación. No se agregaron resultados científicos ni capas SIG nuevas.
+
+### Pruebas de mantenimiento
+
+Después de actualizar, comprobar en XAMPP: portada con solo fotografía, título e iconos; destino correcto de los cinco accesos; navegación de regreso; visor de perfiles; apertura y cierre de PDF.js; pestañas y controles de línea del tiempo; visualización móvil y escritorio. Al agregar o renombrar una página, actualizar los enlaces de `components/navbar.php` y, si corresponde, `components/hero.php`.
+
+Esta separación reorganiza la presentación y la navegación. Las capas SIG oficiales, los modelos 3D y el video de dron siguen pendientes de entrega por el equipo investigador.
