@@ -67,3 +67,10 @@ Si se vuelve a modificar la portada, comprobar la legibilidad del título, boton
 - Se reforzó el contraste y el tamaño de textos de navegación, descripciones, tarjetas, notas y controles. El texto blanco del hero se conserva para mantener su legibilidad sobre la fotografía.
 - Validar escritorio y móvil, revisar que el marcador no cubra el título ni controles, y confirmar que el efecto se desactive con `prefers-reduced-motion`.
 - Cuando se reciba el video de dron, comprobar duración, peso, derechos de uso, compatibilidad MP4/WebM y versión de respaldo antes de publicarlo.
+
+
+### Iconos de los cinco módulos principales
+
+Los accesos de la sección `#servicios` en `index.php` utilizan SVG incrustado en el propio HTML, sin fuentes de iconos ni dependencias externas. Los símbolos son: marcador de ubicación (visor), cubo isométrico (modelos 3D), reloj (línea del tiempo), ondas (vulnerabilidad costera) y cilindro de datos (datos y resultados).
+
+El trazo se define en `assets/css/theme-light.css`: color turquesa, grosor uniforme, extremos redondeados y ausencia de relleno. Los SVG tienen `aria-hidden="true"` porque los enlaces ya cuentan con texto descriptivo accesible. Para modificar la iconografía, conservar los enlaces y etiquetas, editar únicamente el SVG correspondiente y comprobar su visualización en escritorio y móvil.
