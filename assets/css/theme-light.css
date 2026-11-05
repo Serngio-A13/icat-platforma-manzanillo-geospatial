@@ -1,0 +1,520 @@
+/* ==========================================================================
+   TEMA CLARO DEL ATLAS DIGITAL DEL LITORAL
+   --------------------------------------------------------------------------
+   Propósito: aplicar una paleta clara y oceanográfica sin reescribir los
+   estilos originales ni modificar la estructura o funcionalidad del sitio.
+   Mantenimiento: cargar esta hoja DESPUÉS de style.css, responsive.css y
+   research-library.css. Los selectores de esta hoja sobrescriben únicamente
+   colores, fondos, bordes y contraste visual.
+   Paleta: blanco frío #F5F7F8, blanco #FFFFFF, azul profundo #123B50,
+   azul oceánico #168AAD y azul niebla #DCEEF2.
+   ========================================================================== */
+
+/* 1. Variables globales del tema claro. */
+:root {
+    --bg: #F5F7F8;
+    --panel: #FFFFFF;
+    --line: #DCE4E8;
+    --text: #243B48;
+    --muted: #647985;
+    --accent: #168AAD;
+    --aqua: #168AAD;
+}
+
+/* 2. Fondo general, tipografía y elementos de navegación. */
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.site-header {
+    background: rgb(255 255 255 / 96%);
+    border-bottom-color: var(--line);
+    box-shadow: 0 3px 16px rgb(18 59 80 / 5%);
+}
+
+.brand-mark {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.brand strong {
+    color: #123B50;
+}
+
+.brand small,
+nav a {
+    color: #647985;
+}
+
+nav a:hover,
+footer a:hover {
+    color: var(--accent);
+}
+
+.menu-toggle {
+    color: #123B50;
+    border-color: var(--line);
+}
+
+/* 3. La portada conserva la fotografía y el contraste oscuro para mantener
+   su carácter inmersivo y asegurar que el texto blanco siga siendo legible. */
+.hero {
+    color: #FFFFFF;
+}
+
+.hero h1 {
+    color: #FFFFFF;
+}
+
+.hero h1 span {
+    color: #8BE0EA;
+}
+
+.hero .eyebrow,
+.hero .hero-bottom a {
+    color: #8BE0EA;
+}
+
+.hero .lead {
+    color: #E5F0F2;
+}
+
+.hero .hero-meta,
+.hero .hero-aside,
+.hero .hero-bottom {
+    color: #D0E0E4;
+}
+
+.hero .ghost {
+    color: #FFFFFF;
+    border-color: rgb(255 255 255 / 55%);
+}
+
+.hero .primary {
+    background: #8BE0EA;
+    color: #123B50;
+}
+
+/* 4. Tarjetas de acceso rápido e introducción. */
+.quick-links > a {
+    background: #FFFFFF;
+    border-color: var(--line);
+    box-shadow: 0 5px 18px rgb(18 59 80 / 4%);
+}
+
+.quick-links > a:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 22px rgb(18 59 80 / 9%);
+}
+
+.module-icon,
+.quick-links b,
+.kicker,
+.eyebrow,
+.text-link {
+    color: var(--accent);
+}
+
+.quick-links strong,
+h2,
+h3 {
+    color: #123B50;
+}
+
+.quick-links small,
+.intro-copy,
+.section-lead {
+    color: #647985;
+}
+
+/* 5. Secciones, pestañas y paneles de contenido. */
+.map-section,
+.timeline-section,
+.results-section,
+.multimedia-section {
+    background: #F5F7F8;
+}
+
+.project-tabs,
+.tab-panel,
+.layer-panel,
+.category-panel,
+.filter-panel,
+.variables-panel,
+.time-controls,
+.participant-placeholder {
+    background: #FFFFFF;
+    border-color: var(--line);
+}
+
+.tab-list {
+    background: #F0F5F7;
+    border-color: var(--line);
+}
+
+.tab-button,
+.category-button,
+.participant-tabs button,
+.media-filters button,
+.year-track button {
+    color: #526B78;
+}
+
+.tab-button.is-active,
+.category-button.is-active,
+.participant-tabs button.is-active,
+.media-filters button.is-active,
+.year-track button.is-active {
+    color: #126F8C;
+    border-color: #9CCBD8;
+    background: #EAF5F8;
+}
+
+.tab-panel p,
+.intro-copy,
+.section-lead,
+.timeline-bottom p,
+.model-card p,
+.multimedia-grid p,
+.note,
+.variables-panel p {
+    color: #647985;
+}
+
+/* 6. Visor geoespacial y controles de capas. */
+.layer-panel,
+.category-panel,
+.filter-panel,
+.variables-panel,
+.map-shell {
+    border-color: var(--line);
+}
+
+.layer-list label,
+.variables-panel label,
+.timeline-bottom label,
+.tool-list {
+    color: #526B78;
+}
+
+.layer-list input,
+.variables-panel input,
+.timeline-bottom input,
+#comparison-slider {
+    accent-color: var(--accent);
+}
+
+.map-shell {
+    background: #FFFFFF;
+}
+
+.map-toolbar {
+    color: #126F8C;
+    background: #F0F6F8;
+    border-bottom-color: var(--line);
+}
+
+.dot {
+    background: var(--accent);
+    box-shadow: 0 0 10px rgb(22 138 173 / 30%);
+}
+
+#coastal-map {
+    background: #EAF1F4;
+}
+
+.map-legend {
+    color: #647985;
+    background: #FFFFFF;
+    border-top: 1px solid var(--line);
+}
+
+/* 7. Catálogo de modelos, comparación temporal y resultados. */
+.model-card,
+.repository,
+.multimedia-grid article {
+    background: #FFFFFF;
+    border-color: var(--line);
+    box-shadow: 0 4px 16px rgb(18 59 80 / 4%);
+}
+
+.model-card-body small,
+.multimedia-grid small,
+.model-card-body small {
+    color: #168AAD;
+}
+
+.model-card p,
+.multimedia-grid p {
+    color: #647985;
+}
+
+.outline-button {
+    color: #126F8C;
+    border-color: #9CCBD8;
+    background: #FFFFFF;
+}
+
+.outline-button:hover {
+    background: #EAF5F8;
+}
+
+.year-track {
+    border-bottom-color: var(--line);
+}
+
+.range-label {
+    color: #526B78;
+}
+
+.range-label output {
+    color: #126F8C;
+}
+
+.comparison-demo {
+    border-color: var(--line);
+}
+
+.demo-stamp {
+    background: rgb(18 59 80 / 90%);
+    color: #FFFFFF;
+}
+
+/* 8. Paneles de vulnerabilidad y repositorio de información. */
+.vulnerability-map {
+    border-color: var(--line);
+}
+
+.vulnerability-scale,
+.vulnerability-callout {
+    background: rgb(255 255 255 / 94%);
+    border-color: #DCE4E8;
+    color: #243B48;
+}
+
+.vulnerability-scale h3,
+.vulnerability-callout strong {
+    color: #123B50;
+}
+
+.vulnerability-scale span,
+.vulnerability-callout p {
+    color: #526B78;
+}
+
+.vulnerability-callout small,
+.vulnerability-scale small {
+    color: #126F8C;
+}
+
+.status-pill {
+    color: #8A641E;
+    border-color: #D8B477;
+    background: #FFF8E8;
+}
+
+.filter-panel label {
+    color: #526B78;
+}
+
+.filter-panel select {
+    color: #243B48;
+    background: #FFFFFF;
+    border-color: var(--line);
+}
+
+.repository-head {
+    background: #FFFFFF;
+    border-bottom-color: var(--line);
+}
+
+.repository-head h3 {
+    color: #123B50;
+}
+
+.repository-head p {
+    color: #647985;
+}
+
+.repository-head > span {
+    color: #168AAD;
+}
+
+th {
+    color: #126F8C;
+    background: #EAF2F5;
+}
+
+th,
+td {
+    border-bottom-color: var(--line);
+}
+
+td {
+    color: #526B78;
+}
+
+td:first-child {
+    color: #123B50;
+}
+
+/* 9. Directorio, galería multimedia y pie de página. */
+.participant-tabs button,
+.media-filters button {
+    border-color: var(--line);
+}
+
+.participant-placeholder {
+    border-color: #9CCBD8;
+}
+
+.participant-placeholder h3 {
+    color: #123B50;
+}
+
+.participant-placeholder p {
+    color: #647985;
+}
+
+.multimedia-grid article {
+    padding-bottom: 18px;
+}
+
+footer {
+    background: #FFFFFF;
+    border-top-color: var(--line);
+}
+
+.footer-top p {
+    color: #647985;
+}
+
+.footer-top > a:last-child {
+    color: #168AAD;
+}
+
+.footer-bottom {
+    color: #71838D;
+    border-top-color: var(--line);
+}
+
+/* 10. Biblioteca de mapas y fotografías. */
+.research-map-card {
+    background: #FFFFFF;
+    border-color: var(--line);
+    box-shadow: 0 4px 16px rgb(18 59 80 / 4%);
+}
+
+.research-map-icon {
+    color: #168AAD;
+    background: #EAF5F8;
+    border-color: #B9DCE5;
+}
+
+.research-map-card h3,
+.research-photo-grid article > h3 {
+    color: #123B50;
+}
+
+.research-map-card p,
+.research-photo-grid article > p {
+    color: #647985;
+}
+
+.research-map-card small,
+.research-map-card a,
+.research-photo-grid article > small,
+.research-photo-grid .text-link,
+.map-open-button {
+    color: #126F8C;
+}
+
+.research-photo {
+    background: #EAF1F4;
+}
+
+/* 11. Ventana de consulta PDF: superficie clara y controles de alto contraste.
+   El fondo oscurecido exterior se conserva para distinguir el diálogo. */
+.map-modal-panel {
+    background: #FFFFFF;
+    border-color: var(--line);
+    box-shadow: 0 24px 90px rgb(18 59 80 / 24%);
+}
+
+.map-modal-header,
+.map-modal-actions {
+    border-color: var(--line);
+}
+
+.map-modal-header small {
+    color: #168AAD;
+}
+
+.map-modal-header h2 {
+    color: #123B50;
+}
+
+.map-modal-close {
+    color: #123B50;
+    background: #F0F5F7;
+    border-color: var(--line);
+}
+
+.map-modal-note {
+    color: #647985;
+    background: #F5F7F8;
+    border-color: var(--line);
+}
+
+.pdf-viewer {
+    background: #E8EEF1;
+}
+
+.pdf-viewer-toolbar {
+    background: #F5F7F8;
+    border-bottom-color: var(--line);
+}
+
+.pdf-viewer-toolbar button {
+    color: #123B50;
+    background: #FFFFFF;
+    border-color: #C8D5DB;
+}
+
+#pdf-page-status,
+.pdf-loading {
+    color: #526B78;
+}
+
+#pdf-canvas {
+    box-shadow: 0 4px 24px rgb(18 59 80 / 18%);
+}
+
+/* 12. Controles Leaflet: se adaptan al tema claro sin alterar el mapa base. */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    color: #243B48;
+    background: #FFFFFF;
+}
+
+.leaflet-control-zoom a {
+    color: #123B50 !important;
+    background: #FFFFFF !important;
+    border-color: #C8D5DB !important;
+}
+
+/* 13. Menú móvil: conserva contraste y separación sobre el fondo blanco. */
+@media (max-width: 760px) {
+    nav {
+        background: #FFFFFF;
+        border-bottom-color: var(--line);
+        box-shadow: 0 8px 18px rgb(18 59 80 / 8%);
+    }
+
+    nav a {
+        color: #526B78;
+    }
+}
+
+/* Fin del tema claro. Las reglas responsivas originales siguen vigentes. */
