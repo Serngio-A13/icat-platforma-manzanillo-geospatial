@@ -39,3 +39,10 @@ El GeoJSON incluido es ficticio y sirve exclusivamente para probar la carga de c
 - Los recursos siguen alojados en el repositorio fuente y se consumen mediante URLs de GitHub Raw; esto evita duplicar por ahora los archivos binarios en este repositorio, aunque la publicación final debería migrarlos a almacenamiento institucional controlado.
 - Los archivos HEIC y una fotografía JPG de aproximadamente 10 MB no se muestran todavía en la galería: deben convertirse/optimizarse para garantizar compatibilidad y rendimiento.
 - Antes de publicar, confirmar permisos de difusión, autoría, metadatos y permanencia de las URLs fuente. Las descripciones de tarjetas son orientativas, no metadatos científicos validados.
+
+## Tema visual claro del Atlas
+- La paleta clara se implementa en `assets/css/theme-light.css`, una hoja independiente para evitar mezclar los ajustes visuales con los estilos estructurales originales.
+- `index.php` carga esta hoja después de `style.css`, `responsive.css` y `research-library.css`; por ello, sus reglas sobrescriben colores y fondos sin sustituir la estructura ni las funciones JavaScript.
+- Colores principales: fondo blanco frío `#F5F7F8`, superficies `#FFFFFF`, azul profundo `#123B50`, azul oceánico `#168AAD` y azul niebla `#DCEEF2`.
+- La portada conserva la fotografía aérea y su superposición oscura para mantener el contraste del título. Los mapas Leaflet conservan su proveedor de mosaicos; solo se actualizan los controles y las ventanas emergentes.
+- Al modificar la paleta, actualizar los comentarios de `theme-light.css` y esta sección del README. Comprobar escritorio, móvil, navegación, tarjetas, visor Leaflet y ventana PDF antes de publicar.
