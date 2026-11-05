@@ -669,3 +669,53 @@ td {
 }
 
 /* Fin de los ajustes de portada y legibilidad. */
+
+
+/* 17. Iconografía SVG de los cinco accesos principales.
+   Los trazos replican la referencia proporcionada: turquesa, lineales y sin relleno. */
+.quick-links .module-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin: 0 0 12px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #19D6C3;
+    font-size: inherit;
+    line-height: 1;
+}
+
+.quick-links .module-icon svg {
+    display: block;
+    width: 32px;
+    height: 32px;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.quick-links > a:hover .module-icon {
+    color: #63F0DF;
+}
+
+@media (max-width: 700px) {
+    .quick-links .module-icon {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 9px;
+    }
+
+    .quick-links .module-icon svg {
+        width: 29px;
+        height: 29px;
+    }
+}
+
+/* Fin de la iconografía SVG de los módulos principales. */
