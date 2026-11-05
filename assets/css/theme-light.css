@@ -899,3 +899,87 @@ textarea {
 }
 
 /* Fin del ajuste cromático de la iconografía principal. */
+
+
+/* ==========================================================================
+   PORTADA INDEPENDIENTE CON CINCO ACCESOS PRINCIPALES
+   --------------------------------------------------------------------------
+   En la portada se conservan solo la fotografía, el título y los cinco iconos.
+   Los módulos completos se consultan desde páginas PHP independientes.
+   ========================================================================== */
+.home-landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #F5F7F8;
+}
+
+.home-landing .hero {
+    flex: 1 0 auto;
+    min-height: min(76vh, 820px);
+}
+
+.home-quick-links {
+    margin-top: 0;
+    padding: 22px clamp(18px, 4vw, 64px);
+    background: #F5F7F8;
+    gap: 14px;
+}
+
+.home-quick-links > a {
+    min-height: 132px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #DCE4E8;
+    box-shadow: 0 5px 18px rgb(18 59 80 / 7%);
+}
+
+.home-quick-links > a:hover {
+    border-color: #003153;
+    transform: translateY(-2px);
+}
+
+.home-quick-links .module-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 0 10px;
+    color: #003153;
+}
+
+.home-quick-links .module-icon svg {
+    width: 44px;
+    height: 44px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
+}
+
+.home-quick-links strong {
+    color: #123B50;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+@media (max-width: 700px) {
+    .home-landing .hero {
+        min-height: 62vh;
+    }
+
+    .home-quick-links {
+        padding: 16px 14px;
+        gap: 10px;
+    }
+
+    .home-quick-links > a {
+        min-height: 116px;
+        padding: 12px;
+    }
+
+    .home-quick-links strong {
+        font-size: 13px;
+    }
+}
+
+/* Fin de los estilos de la portada independiente. */
