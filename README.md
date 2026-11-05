@@ -46,3 +46,12 @@ El GeoJSON incluido es ficticio y sirve exclusivamente para probar la carga de c
 - Colores principales: fondo blanco frío `#F5F7F8`, superficies `#FFFFFF`, azul profundo `#123B50`, azul oceánico `#168AAD` y azul niebla `#DCEEF2`.
 - La portada conserva la fotografía aérea y su superposición oscura para mantener el contraste del título. Los mapas Leaflet conservan su proveedor de mosaicos; solo se actualizan los controles y las ventanas emergentes.
 - Al modificar la paleta, actualizar los comentarios de `theme-light.css` y esta sección del README. Comprobar escritorio, móvil, navegación, tarjetas, visor Leaflet y ventana PDF antes de publicar.
+
+
+### Fotografía principal de la portada
+
+La portada utiliza la imagen `assets/images/hero-playa-drone.webp` como fondo. Para sustituirla por otra fotografía, conserva exactamente ese nombre y formato WebP; no es necesario modificar la referencia de la hoja de estilos.
+
+El archivo `assets/css/style.css` controla el encuadre y las capas de contraste de la fotografía. El ajuste más reciente reduce la intensidad de los degradados oscuros y elimina el degradado duplicado del pseudo-elemento `.hero:before`, manteniendo únicamente una retícula técnica muy tenue. En pantallas pequeñas se aplica un encuadre independiente dentro de `@media (max-width: 700px)`.
+
+Si se vuelve a modificar la portada, comprobar la legibilidad del título, botones y metadatos tanto en escritorio como en móvil. La imagen debe permanecer en `assets/images/hero-playa-drone.webp` y el tema claro `assets/css/theme-light.css` debe seguir cargándose después de las hojas de estilo generales.
