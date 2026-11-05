@@ -74,3 +74,12 @@ Si se vuelve a modificar la portada, comprobar la legibilidad del título, boton
 Los accesos de la sección `#servicios` en `index.php` utilizan SVG incrustado en el propio HTML, sin fuentes de iconos ni dependencias externas. Los símbolos son: marcador de ubicación (visor), cubo isométrico (modelos 3D), reloj (línea del tiempo), ondas (vulnerabilidad costera) y cilindro de datos (datos y resultados).
 
 El trazo se define en `assets/css/theme-light.css`: color turquesa, grosor uniforme, extremos redondeados y ausencia de relleno. Los SVG tienen `aria-hidden="true"` porque los enlaces ya cuentan con texto descriptivo accesible. Para modificar la iconografía, conservar los enlaces y etiquetas, editar únicamente el SVG correspondiente y comprobar su visualización en escritorio y móvil.
+
+
+### Legibilidad tipográfica para consulta académica
+
+Se añadió un bloque de accesibilidad tipográfica al final de `assets/css/theme-light.css`. El texto de lectura utiliza peso medio (500), los enlaces y controles seminegrita (600) y los encabezados negrita (700), con tonos azul grisáceo oscuros para mejorar el contraste sobre superficies claras. El texto de la portada permanece claro sobre la fotografía y recibe mayor peso para conservar su legibilidad.
+
+En móvil se evita reducir el texto de lectura por debajo de 15 px y los accesos rápidos mantienen tamaños legibles. Los iconos SVG conservan su trazo original para no alterar la referencia visual.
+
+Al validar este ajuste, revisar párrafos largos, etiquetas, navegación, tablas, formularios, tarjetas y la portada en escritorio y móvil. Si la fuente utilizada no dispone de un peso específico, el navegador puede aproximar el grosor; comprobar que las letras no se vean excesivamente pesadas ni pierdan definición.
